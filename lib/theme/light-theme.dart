@@ -16,6 +16,18 @@ ThemeData lightTheme = ThemeData(
   ),
   buttonTheme: const ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
-    buttonColor: Colors.black
-  )
+  ),
+  elevatedButtonTheme: const ElevatedButtonThemeData(
+    style: ButtonStyle(
+    )
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+    labelStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w200,
+              letterSpacing: 1.1,
+              decorationColor: Colors.red,
+            ),
+  ),
 );

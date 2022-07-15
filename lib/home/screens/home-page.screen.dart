@@ -1,4 +1,5 @@
 import 'package:doemais/main.dart';
+import 'package:doemais/theme/app-color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,22 +21,22 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.add_location),
               label: 'Campanhas',
-              backgroundColor: Colors.purple,
+              backgroundColor: AppColor.primary,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.location_city),
               label: 'ONGs',
-              backgroundColor: Colors.purple,
+              backgroundColor: AppColor.primary,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.done_all),
               label: 'Interesses',
-              backgroundColor: Colors.purple,
+              backgroundColor: AppColor.primary,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
               label: 'Perfil',
-              backgroundColor: Colors.purple,
+              backgroundColor: AppColor.primary,
             )
           ],
         ),

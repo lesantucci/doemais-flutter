@@ -6,16 +6,23 @@ ThemeData lightTheme = ThemeData(
   backgroundColor: AppColor.bodyColor,
   scaffoldBackgroundColor: AppColor.bodyColor,
   hintColor: AppColor.textColor,
-  primaryColorLight: AppColor.buttonBackgroundColor,
+  primaryColorLight: AppColor.primary,
+  primaryColor: AppColor.primary,
   textTheme: const TextTheme(
-    headline1: TextStyle(
-      color: Colors.black,
-      fontSize: 40,
-      fontWeight: FontWeight.bold
-    )
-  ),
+      headline1: TextStyle(
+          color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold)),
   buttonTheme: const ButtonThemeData(
     textTheme: ButtonTextTheme.primary,
-    buttonColor: Colors.black
-  )
+  ),
+  elevatedButtonTheme: const ElevatedButtonThemeData(style: ButtonStyle()),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.0))),
+    labelStyle: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w200,
+      letterSpacing: 1.1,
+      decorationColor: Colors.red,
+    ),
+  ),
 );

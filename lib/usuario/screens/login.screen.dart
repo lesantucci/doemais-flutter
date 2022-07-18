@@ -1,4 +1,4 @@
-import 'package:doemais/home/screens/home-page.screen.dart';
+import 'package:doemais/home/screens/home.screen.dart';
 import 'package:doemais/usuario/screens/cadastro.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
             {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomePage()),
+                MaterialPageRoute(builder: (context) => HomeScreen()),
               )
             }
         });

@@ -1,4 +1,3 @@
-import 'package:doemais/home/screens/home-page.screen.dart';
 import 'package:doemais/usuario/screens/login.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';

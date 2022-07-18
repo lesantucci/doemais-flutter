@@ -1,5 +1,5 @@
-import 'package:doemais/home/screens/home-page.screen.dart';
 import 'package:doemais/theme/light-theme.dart';
+import 'package:doemais/usuario/screens/login.screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LoginScreen(),
     );
   }
 }

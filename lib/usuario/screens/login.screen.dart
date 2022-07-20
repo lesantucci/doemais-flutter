@@ -69,17 +69,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ))),
           Flexible(
               child: FractionallySizedBox(
-            widthFactor: 0.80,
-            heightFactor: 0.070,
-            child: ElevatedButton.icon(
-              icon: const Icon(
-                Icons.arrow_forward,
-                size: 24.0,
-              ),
-              onPressed: () => {signIn()},
-              label: const Text('Acessar'),
-            ),
-          )),
+                  widthFactor: 0.80,
+                  child: Container(
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        size: 24.0,
+                      ),
+                      onPressed: () => {signIn()},
+                      label: const Text('Acessar'),
+                    ),
+                  ))),
           const Padding(
               padding: EdgeInsets.only(top: 40),
               child: Text("Ainda não sou cadastrado, gostaria de")),

@@ -96,12 +96,13 @@ class _CadastroScreenState extends State<CadastroScreen> {
           Flexible(
               child: FractionallySizedBox(
             widthFactor: 0.80,
-            heightFactor: 0.070,
-            child: ElevatedButton(
+            child:  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
               onPressed: _isDisabled ? null : () => {cadastrar()},
               child: const Text('Cadastrar'),
             ),
-          )),
+          ))),
           const Padding(
               padding: EdgeInsets.only(top: 40),
               child: Text("Já sou cadastrado, gostaria de me")),

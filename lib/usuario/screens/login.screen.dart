@@ -15,17 +15,21 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String _login = '';
   String _password = '';
+  bool _isDisabled = false;
 
   void signIn() async {
+    setState(() { _isDisabled = true; });
     final usuarioService = UsuarioService();
     usuarioService.login(_login, _password).then((value) => {
-          if (value)
-            {
+          if (value){
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomeScreen()),
               )
-            }
+          }
+          else {
+          setState(() {_isDisabled = false;})
+          }
         });
   }
 
@@ -76,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icons.arrow_forward,
                 size: 24.0,
               ),
-              onPressed: () => {signIn()},
+              onPressed: habilitaBotao(),
               label: const Text('Acessar'),
             ),
           )),
@@ -95,5 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     ));
+  }
+  
+  habilitaBotao() {
+    return  _isDisabled ? null : () => {signIn()};
   }
 }

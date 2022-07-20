@@ -1,30 +1,22 @@
 import 'dart:convert';
-import 'package:doemais/commons/storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_interceptor/http/intercepted_client.dart';
+import '../interceptors/http.interceptor.dart';
 
 class HttpHandler {
+  static final http.Client client = InterceptedClient.build(interceptors: [
+    ApiInterceptor(),
+  ]);
+
   static Future<http.Response> post(String url, Map<String, dynamic> body) {
-    return http.post(Uri.parse(url),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'access_token': Storage.jwt
-        },
-        body: jsonEncode(body));
+    return client.post(Uri.parse(url), body: jsonEncode(body));
   }
 
   static Future<http.Response> get(String url) {
-    return http.get(Uri.parse(url), headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access_token': Storage.jwt
-    });
+    return client.get(Uri.parse(url));
   }
 
   static Future<http.Response> put(String url, [dynamic body]) {
-    return http.put(Uri.parse(url),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'access_token': Storage.jwt
-        },
-        body: body);
+    return client.put(Uri.parse(url), body: body);
   }
 }

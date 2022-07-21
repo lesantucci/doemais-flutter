@@ -10,6 +10,7 @@ class UsuarioService {
   Future<bool> login(String login, String password) async {
     Response response = await HttpHandler.post(Endpoints.usuarioLogin,
         <String, dynamic>{'email': login, 'senha': password});
+    print(json.decode(response.body));
     if (response.statusCode == 200) {
       Storage.jwt = json.decode(response.body)["token"];
       return true;

@@ -15,21 +15,25 @@ class _CadastroScreenState extends State<CadastroScreen> {
   String _email = '';
   String _password = '';
   String _confirmacaoPassword = '';
+  bool _isDisabled = false;
 
   void cadastrar() async {
     if (validatePassword()) {
       final usuarioService = UsuarioService();
+      setState(() {_isDisabled = true;});
       usuarioService.cadastrar(_email, _password).then((value) => {
-            value
-                ? Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()),
-                  )
-                : print("Erro ocorreu")
+            if (value) {
+              Navigator.pop(context)
+              // Navigator.pushReplacement(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => const LoginScreen()),
+              //     )
+            } else {
+              setState(() {_isDisabled = false;})
+            }
           });
-      Navigator.pop(context);
-    }
+    } 
   }
 
   bool validatePassword() {
@@ -92,12 +96,13 @@ class _CadastroScreenState extends State<CadastroScreen> {
           Flexible(
               child: FractionallySizedBox(
             widthFactor: 0.80,
-            heightFactor: 0.070,
-            child: ElevatedButton(
-              onPressed: () => {cadastrar()},
+            child:  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+              onPressed: _isDisabled ? null : () => {cadastrar()},
               child: const Text('Cadastrar'),
             ),
-          )),
+          ))),
           const Padding(
               padding: EdgeInsets.only(top: 40),
               child: Text("Já sou cadastrado, gostaria de me")),

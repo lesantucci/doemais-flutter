@@ -17,7 +17,7 @@ class Usuario {
         nome: json['nome'],
         sexo: json['sexo'],
         email: json['email'],
-        dtNascimento: json['dtNascimento'],
+        dtNascimento: json['nascimento'],
         contato: json['contato']);
   }
 }

@@ -16,7 +16,7 @@ class Campanha {
   final String categoria;
   final int status;
 
-  const Campanha(
+  Campanha(
       {required this.id,
       required this.ong,
       required this.nome,
@@ -30,7 +30,6 @@ class Campanha {
       required this.dataFinal,
       required this.categoria,
       required this.status});
-
   factory Campanha.fromJson(Map<String, dynamic> json) {
     return Campanha(
         id: json['id'],

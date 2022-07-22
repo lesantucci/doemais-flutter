@@ -21,7 +21,7 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
         categoria: "",
         dataFinal: "",
         dataInicial: "",
-        descricao: "",
+        descricao: "Descrição Campanha 1",
         id: 1,
         endereco: const Endereco(
             cep: "",
@@ -33,8 +33,31 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
             latitude: "",
             longitude: ""),
         imagens: {"perfil": ""},
-        nome: "",
-        ong: {"nome": "nome"},
+        nome: "Campanha 1",
+        ong: <String, dynamic>{"id": 1, "nome": "Instituicao 1"},
+        status: 1),
+        Campanha(
+        agenda: const Agenda(
+            agenda: [0, 0, 0, 0, 0, 0, 0], horaInicio: "", horaFim: ""),
+        apoiadores: 1,
+        apoio: true,
+        categoria: "",
+        dataFinal: "",
+        dataInicial: "",
+        descricao: "Descrição Campanha 2",
+        id: 1,
+        endereco: const Endereco(
+            cep: "",
+            logradouro: "",
+            complemento: "",
+            bairro: "",
+            localidade: "",
+            uf: "",
+            latitude: "",
+            longitude: ""),
+        imagens: {"perfil": ""},
+        nome: "Campanha 2",
+        ong: <String, dynamic>{"id": 1, "nome": "Instituicao 2"},
         status: 1)
   ];
 
@@ -56,105 +79,106 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
                   ),
                 ),
               ),
-              Expanded(child:
-                CardCampanha(listaCampanha: lista) 
-              )
-              
+              Expanded(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: lista.length,
+                      itemBuilder: (context, index) =>
+                          CardCampanha(campanha: lista[index])))
             ])));
   }
 }
 
 class CardCampanha extends StatelessWidget {
-  final List<Campanha> listaCampanha;
+  final Campanha campanha;
 
-  const CardCampanha({Key? key, required this.listaCampanha}) : super(key: key);
+  const CardCampanha({Key? key, required this.campanha}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-            height: 140,
-            child: 
-            ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: listaCampanha.length,
-                    itemBuilder: (context, index) =>
-                        Padding(
-                  padding: const EdgeInsets.all(10.0),
-                child: Card(
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Row(
-                  children: [
-                    const Padding(
-                        padding: EdgeInsets.all(5),
-                        child: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage('lib/assets/images/cat-example.png'),
-                            radius: 220,
-                          ),
-                        )),
-                    Expanded(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 2),
-                              child: Text(
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.1,
-                                    color: Color(0xff6200ee)),
-                                "teste",
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 2),
-                              child: Text(
-                                  style: const TextStyle(fontSize: 12),
-                                  "teste"),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: RichText(
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                    textAlign: TextAlign.start,
-                                    textScaleFactor: 1.0,
-                                    text: const TextSpan(
-                                        text:
-                                            "Lorem Forem lur Lorem Forem lur ed Lorem Forem lur ed Lorem Forem lur ed Lorem Forem lur ed Lorem Forem lur ed"))),
-                            const Spacer(),
-                            Row(
-                              children: [
-                                const Expanded(
-                                    flex: 2, child: Text("Localidade")),
-                                Expanded(
-                                    flex: 0,
-                                    child: SizedBox(
-                                      height: 32,
-                                      child: ElevatedButton.icon(
-                                        icon: const Icon(
-                                          Icons.favorite,
-                                          size: 18.0,
-                                        ),
-                                        onPressed: () => {},
-                                        label: const Text('Apoiar'),
-                                      ),
-                                    ))
-                              ],
-                            )
-                          ],
-                        ))
-                  ],
+    return Card(
+      child: SizedBox(
+        height: 140,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+        children: [
+          const Padding(
+              padding: EdgeInsets.all(5),
+              child: SizedBox(
+                height: 100,
+                width: 100,
+                child: 
+                CircleAvatar(
+                  backgroundImage:
+                      AssetImage('lib/assets/images/cat-example.png'),
+                  radius: 220,
                 ),
-                )),
+              )),
+          Expanded(
+              flex: 1,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 2),
+                    child: Text(
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.1,
+                        color: Color(0xff6200ee)
+                      ),
+                      campanha.nome,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                        campanha.ong["nome"],
+                        style: const TextStyle(
+                        fontSize: 12
+                      )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: RichText(
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      textAlign: TextAlign.start,
+                      textScaleFactor: 1.0,
+                      text: TextSpan(text: campanha.descricao)
+                      )
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      Expanded(flex: 2, child: Text(campanha.endereco.toString())),
+                      Expanded(
+                          flex: 0,
+                          child: SizedBox(
+                                height: 32,
+                                child: ElevatedButton.icon(
+                                  icon: const Icon(
+                                    Icons.favorite,
+                                    size: 18.0,
+                                  ),
+                                  onPressed: () => {},
+                                  label: const Text('Apoiar'),
+                                ),
+                              )
+                          )
+                      ],
                   )
-            );
+                ],
+              )
+            )
+        ],
+      )
+        )
+      )
+    );
   }
 }

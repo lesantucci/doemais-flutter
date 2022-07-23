@@ -86,7 +86,7 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
       body: SizedBox(
         width: double.infinity,
         child: FractionallySizedBox(
-          widthFactor: 0.80,
+          widthFactor: 0.95,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[

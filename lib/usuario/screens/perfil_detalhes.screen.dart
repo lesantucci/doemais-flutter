@@ -27,7 +27,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             FractionallySizedBox(
-              widthFactor: 0.80,
+              widthFactor: 0.95,
               child: SizedBox(
                 width: double.infinity,
                 child: Row(
@@ -53,7 +53,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
               ),
             ),
             FractionallySizedBox(
-                widthFactor: 0.80,
+                widthFactor: 0.95,
                 child: Container(
                   width: double.infinity,
                   decoration: ShapeDecoration.fromBoxDecoration(BoxDecoration(

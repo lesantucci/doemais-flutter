@@ -1,3 +1,4 @@
+import 'package:doemais/theme/app-color.dart';
 import 'package:flutter/material.dart';
 
 class DetalhesScreen extends StatelessWidget {
@@ -13,11 +14,10 @@ class DetalhesScreen extends StatelessWidget {
 
   Widget buildHomePage(String title) {
     const titleText = Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(20),
       child: Text(
         'Doação de Rações',
-        style:
-            TextStyle(fontSize: 20, color: Color.fromARGB(255, 211, 31, 235)),
+        style: TextStyle(fontSize: 20, color: AppColor.primary),
       ),
     );
 
@@ -41,16 +41,20 @@ class DetalhesScreen extends StatelessWidget {
       ),
     );
 
-    final imagem1 = Image.network(
+    const imagem = Image.network(
       'https://picsum.photos/250?image=9',
       width: 125,
       height: 125,
     );
 
-    final imagem2 = Image.network(
-      'https://picsum.photos/250?image=9',
-      width: 125,
-      height: 125,
+    const apoiadores = Row(
+      children: [
+        Icon(
+          const Icon(Icons.add_location),
+          size: 50,
+          color: AppColor.primary,
+        )
+      ],
     );
 
     return Scaffold(
@@ -62,7 +66,7 @@ class DetalhesScreen extends StatelessWidget {
           child: Card(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [texto, imagem1, imagem2],
+              children: [texto, imagem, apoiadores],
             ),
           ),
         ),

@@ -1,23 +1,21 @@
 class Usuario {
-  final String nome;
-  final String sexo;
-  final String email;
-  final String dtNascimento;
-  final String contato;
+  String nome = "";
+  String sexo = "";
+  String email = "";
+  String dtNascimento = "";
+  String contato = "";
+  String iniciais = "";
 
-  const Usuario(
-      {required this.nome,
-      required this.sexo,
-      required this.email,
-      required this.dtNascimento,
-      required this.contato});
+  Usuario();
 
   factory Usuario.fromJson(Map<String, dynamic> json) {
-    return Usuario(
-        nome: json['nome'],
-        sexo: json['sexo'],
-        email: json['email'],
-        dtNascimento: json['nascimento'],
-        contato: json['contato']);
+    Usuario usuario = Usuario();
+    usuario.nome = json['nome'];
+    usuario.sexo = json['sexo'];
+    usuario.email = json['email'];
+    usuario.dtNascimento = json['nascimento'];
+    usuario.contato = json['contato'];
+
+    return usuario;
   }
 }

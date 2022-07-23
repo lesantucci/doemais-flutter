@@ -53,8 +53,7 @@ class UsuarioService {
 
       return Usuario.fromJson(body);
     } else {
-      return const Usuario(
-          nome: "", sexo: "", email: "", dtNascimento: "", contato: "");
+      return Usuario();
     }
   }
 }

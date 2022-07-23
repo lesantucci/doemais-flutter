@@ -1,3 +1,7 @@
+import 'package:doemais/campanha/models/campanha.model.dart';
+import 'package:doemais/commons/models/agenda.model.dart';
+import 'package:doemais/commons/models/endereco.model.dart';
+import 'package:doemais/theme/app-color.dart';
 import 'package:flutter/material.dart';
 
 class CampanhaScreen extends StatefulWidget {
@@ -8,34 +12,105 @@ class CampanhaScreen extends StatefulWidget {
 }
 
 class _CampanhaScreenState extends State<CampanhaScreen> {
-  List<Map<String, dynamic>> lista = [{}];
+  List<Campanha> lista = [
+    Campanha(
+        agenda: const Agenda(
+            agenda: [0, 0, 0, 0, 0, 0, 0], horaInicio: "", horaFim: ""),
+        apoiadores: 1,
+        apoio: true,
+        categoria: "",
+        dataFinal: "",
+        dataInicial: "",
+        descricao: "Descrição Campanha 1",
+        id: 1,
+        endereco: const Endereco(
+            cep: "",
+            logradouro: "",
+            complemento: "",
+            bairro: "",
+            localidade: "",
+            uf: "",
+            latitude: "",
+            longitude: ""),
+        imagens: {"perfil": ""},
+        nome: "Campanha 1",
+        ong: <String, dynamic>{"id": 1, "nome": "Instituicao 1"},
+        status: 1),
+        Campanha(
+        agenda: const Agenda(
+            agenda: [0, 0, 0, 0, 0, 0, 0], horaInicio: "", horaFim: ""),
+        apoiadores: 1,
+        apoio: true,
+        categoria: "",
+        dataFinal: "",
+        dataInicial: "",
+        descricao: "Descrição Campanha 2",
+        id: 1,
+        endereco: const Endereco(
+            cep: "",
+            logradouro: "",
+            complemento: "",
+            bairro: "",
+            localidade: "",
+            uf: "",
+            latitude: "",
+            longitude: ""),
+        imagens: {"perfil": ""},
+        nome: "Campanha 2",
+        ong: <String, dynamic>{"id": 1, "nome": "Instituicao 2"},
+        status: 1)
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container (
-        height: 120,
-        margin: EdgeInsets.all(10.0),
-        child: CardCampanha()
-      )
-    );
+        appBar: AppBar(
+          title: const Text("Campanhas"),
+        ),
+        body: Container(
+            margin: const EdgeInsets.all(10.0),
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: TextFormField(
+                  onChanged: (text) {},
+                  decoration: const InputDecoration(
+                    labelText: 'Pesquisa',
+                  ),
+                ),
+              ),
+              Expanded(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: lista.length,
+                      itemBuilder: (context, index) =>
+                          CardCampanha(campanha: lista[index])))
+            ])));
   }
 }
 
 class CardCampanha extends StatelessWidget {
-  const CardCampanha({Key? key}) : super(key: key);
+  final Campanha campanha;
+
+  const CardCampanha({Key? key, required this.campanha}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
+      child: SizedBox(
+        height: 140,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
         children: [
           const Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(5),
               child: SizedBox(
                 height: 100,
                 width: 100,
-                child: CircleAvatar(
+                child: 
+                CircleAvatar(
                   backgroundImage:
                       AssetImage('lib/assets/images/cat-example.png'),
                   radius: 220,
@@ -47,46 +122,63 @@ class CardCampanha extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 2),
                     child: Text(
-                      "Nome",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.1,
+                        color: Color(0xff6200ee)
+                      ),
+                      campanha.nome,
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 2),
-                    child: Text("Instituição"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                        campanha.ong["nome"],
+                        style: const TextStyle(
+                        fontSize: 12
+                      )),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text("Descricao"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: RichText(
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
+                      textAlign: TextAlign.start,
+                      textScaleFactor: 1.0,
+                      text: TextSpan(text: campanha.descricao)
+                      )
                   ),
+                  const Spacer(),
                   Row(
                     children: [
-                      const Expanded(flex: 2, child: Text("Localidade")),
+                      Expanded(flex: 2, child: Text(campanha.endereco.toString())),
                       Expanded(
                           flex: 0,
-                          child: Padding(
-                              padding: EdgeInsetsDirectional.only(end: 10),
-                              child: SizedBox(
-                                height: 40,
+                          child: SizedBox(
+                                height: 32,
                                 child: ElevatedButton.icon(
                                   icon: const Icon(
                                     Icons.favorite,
-                                    size: 24.0,
+                                    size: 18.0,
                                   ),
                                   onPressed: () => {},
                                   label: const Text('Apoiar'),
                                 ),
                               )
-                            )
                           )
                       ],
                   )
                 ],
-              ))
+              )
+            )
         ],
-      ),
+      )
+        )
+      )
     );
   }
 }

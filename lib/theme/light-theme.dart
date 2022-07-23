@@ -8,6 +8,19 @@ ThemeData lightTheme = ThemeData(
   hintColor: AppColor.textColor,
   primaryColorLight: AppColor.primary,
   primaryColor: AppColor.primary,
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.transparent,
+    titleTextStyle: TextStyle(
+      color: AppColor.textColor,
+      fontWeight: FontWeight.bold,
+      fontSize: 18.0
+    ),
+    elevation: 0
+  ),
+  cardTheme: CardTheme(
+    elevation: 0,
+    color: AppColor.cardColor
+  ),
   textTheme: const TextTheme(
       headline1: TextStyle(
           color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold)),

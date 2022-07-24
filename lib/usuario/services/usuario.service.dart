@@ -30,18 +30,30 @@ class UsuarioService {
   }
 
   Future<bool> atualizarPerfil(Usuario usuario) async {
-    Response response =
-        await HttpHandler.put(Endpoints.usuarioCadastrar, <String, dynamic>{
+    dynamic body = <String, dynamic>{
       'nome': usuario.nome,
-      'dtNascimento': usuario.dtNascimento,
-      'email': usuario.email,
+      'nascimento': usuario.dtNascimento,
       'sexo': usuario.sexo,
       'contato': usuario.contato
-    });
+    };
+    Response response =
+        await HttpHandler.put(Endpoints.usuarioPerfil, jsonEncode(body));
     if (response.statusCode == 200 || response.statusCode == 201) {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<Usuario> consultarPerfil() async {
+    Response response = await HttpHandler.get(Endpoints.usuarioPerfil);
+
+    if (response.statusCode == 200) {
+      dynamic body = json.decode(response.body)["usuario"];
+
+      return Usuario.fromJson(body);
+    } else {
+      return Usuario();
     }
   }
 }

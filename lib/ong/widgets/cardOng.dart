@@ -1,19 +1,23 @@
+import '../controller/Filter.controller.dart';
 import '../models/ong.model.dart';
 import 'package:flutter/material.dart';
 
+import '../services/ong.service.dart';
+
 class CardOng extends StatefulWidget {
   final Ong ong;
+  FilterController filterController;
 
-  CardOng({Key? key, required this.ong}) : super(key: key);
+  CardOng({Key? key, required this.ong, required this.filterController})
+      : super(key: key);
 
   @override
-  State<CardOng> createState() => _CardOngState(favorito: ong.favorito);
+  State<CardOng> createState() => _CardOngState();
 }
 
 class _CardOngState extends State<CardOng> {
-  bool favorito;
-
-  _CardOngState({Key? key, required this.favorito});
+  final OngService ongService = OngService();
+  _CardOngState({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +28,14 @@ class _CardOngState extends State<CardOng> {
                 padding: const EdgeInsets.all(2),
                 child: Row(
                   children: [
-                    const Padding(
+                    Padding(
                         padding: EdgeInsets.all(5),
                         child: SizedBox(
                           height: 100,
                           width: 100,
                           child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage('lib/assets/images/cat-example.png'),
+                            backgroundImage: NetworkImage(
+                                'https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/${super.widget.ong.imagens['avatar']}'),
                             radius: 220,
                           ),
                         )),
@@ -51,10 +55,10 @@ class _CardOngState extends State<CardOng> {
                                         fontWeight: FontWeight.bold,
                                         letterSpacing: 1.1,
                                         color: Color(0xff6200ee)),
-                                    super.widget.ong.titulo,
+                                    super.widget.ong.nome,
                                   ),
                                 )),
-                                favorito
+                                super.widget.ong.favorito
                                     ? IconButton(
                                         icon: const Icon(Icons.star),
                                         color: Colors.purple,
@@ -63,7 +67,17 @@ class _CardOngState extends State<CardOng> {
                                         alignment: const Alignment(0, -5),
                                         onPressed: () async {
                                           setState(() {
-                                            favorito = false;
+                                            try {
+                                              ongService.favoritar(
+                                                  super.widget.ong.id);
+                                              super
+                                                  .widget
+                                                  .filterController
+                                                  .atualizarFav(
+                                                      super.widget.ong);
+                                            } catch (e) {
+                                              rethrow;
+                                            }
                                           });
                                         },
                                       )
@@ -75,7 +89,17 @@ class _CardOngState extends State<CardOng> {
                                         alignment: const Alignment(0, -5),
                                         onPressed: () async {
                                           setState(() {
-                                            favorito = true;
+                                            try {
+                                              ongService.favoritar(
+                                                  super.widget.ong.id);
+                                              super
+                                                  .widget
+                                                  .filterController
+                                                  .atualizarFav(
+                                                      super.widget.ong);
+                                            } catch (e) {
+                                              rethrow;
+                                            }
                                           });
                                         },
                                       ),

@@ -16,7 +16,14 @@ class Endpoints {
   //ONG
   static const String ong = "$baseUrl/ong";
   static const String ongCapanha = "$baseUrl/ong/campanha";
-  static const String congFavoritar = "$baseUrl/ong/favoritar";
+  static const String ongFavoritar = "$baseUrl/ong/favorita";
 
-  static const String categoria = "$baseUrl/categoria";
+  static const String categoriaONG = "$baseUrl/categorias/ONG";
+
+  // INTERESSES
+  static const String interesses = "${Endpoints.campanha}/interesses";
+
+  static String getArquivo(String nome) {
+    return "https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/$nome";
+  }
 }

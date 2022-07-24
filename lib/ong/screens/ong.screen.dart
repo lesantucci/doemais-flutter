@@ -60,7 +60,7 @@ class _OngScreenState extends State<OngScreen> {
                             suffixIcon: IconButton(
                               icon: const Icon(Icons.filter_list),
                               onPressed: () {
-                                showCupertinoModalPopup(
+                                showModalBottomSheet(
                                     context: context,
                                     builder: (context) => ongFiltersScreen(
                                           filterController: local,

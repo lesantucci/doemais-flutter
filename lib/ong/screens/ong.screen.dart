@@ -2,6 +2,7 @@ import 'package:doemais/ong/models/ong.model.dart';
 import 'package:doemais/ong/screens/ongFilters.screen.dart';
 import 'package:doemais/ong/services/ong.service.dart';
 import 'package:doemais/ong/widgets/cardOng.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OngScreen extends StatefulWidget {
@@ -53,13 +54,11 @@ class _OngScreenState extends State<OngScreen> {
                   decoration: InputDecoration(
                       labelText: 'Pesquisar',
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.filter_list),
+                        icon: const Icon(Icons.filter_list),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ongFiltersScreen()),
-                          );
+                          showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) => ongFiltersScreen());
                         },
                       )),
                 ),

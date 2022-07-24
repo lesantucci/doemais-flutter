@@ -8,6 +8,7 @@ ThemeData lightTheme = ThemeData(
   primaryColorLight: AppColor.primary,
   primaryColor: AppColor.primary,
   appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: Colors.black),
       backgroundColor: Colors.transparent,
       titleTextStyle: TextStyle(
           color: AppColor.textColor,

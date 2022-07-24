@@ -1,5 +1,7 @@
 import 'package:doemais/ong/models/ong.model.dart';
-import 'package:doemais/ong/widgets/CardOng.dart';
+import 'package:doemais/ong/screens/ongFilters.screen.dart';
+import 'package:doemais/ong/services/ong.service.dart';
+import 'package:doemais/ong/widgets/cardOng.dart';
 import 'package:flutter/material.dart';
 
 class OngScreen extends StatefulWidget {
@@ -10,7 +12,25 @@ class OngScreen extends StatefulWidget {
 }
 
 class _OngScreenState extends State<OngScreen> {
-  List<Ong> lista = allOngs;
+  late List<Ong> lista;
+  List<Ong> listaFiltrada = [];
+
+  void _listarOngs() {
+    final ongService = OngService();
+    ongService.pesquisar().then((list) => {
+          setState(() {
+            lista = list;
+            listaFiltrada = list;
+          })
+        });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    _listarOngs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,31 +50,40 @@ class _OngScreenState extends State<OngScreen> {
                 padding: const EdgeInsets.only(bottom: 20),
                 child: TextField(
                   onChanged: searchOng,
-                  decoration: const InputDecoration(
-                    labelText: 'Pesquisar',
-                  ),
+                  decoration: InputDecoration(
+                      labelText: 'Pesquisar',
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.filter_list),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ongFiltersScreen()),
+                          );
+                        },
+                      )),
                 ),
               ),
               Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: lista.length,
+                      itemCount: listaFiltrada.length,
                       itemBuilder: (context, index) =>
-                          CardOng(ong: lista[index])))
+                          CardOng(ong: listaFiltrada[index])))
             ])));
   }
 
   void searchOng(String query) {
-    final suggestions = allOngs.where((ong) {
-      final titulo = ong.titulo.toLowerCase();
+    final suggestions = lista.where((ong) {
+      final titulo = ong.nome.toLowerCase();
       final input = query.toLowerCase();
 
       return titulo.contains(input);
     }).toList();
 
     setState(() {
-      lista = suggestions;
+      listaFiltrada = suggestions;
     });
   }
 }

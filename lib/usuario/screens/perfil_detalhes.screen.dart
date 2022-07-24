@@ -169,7 +169,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                               style: ButtonStyle(
                                                 backgroundColor:
                                                     MaterialStateProperty.all(
-                                                        Colors.deepPurple[50]),
+                                                        Colors.deepPurple[100]),
                                               ),
                                               child: const Text(
                                                 "Editar perfil",

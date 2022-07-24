@@ -22,6 +22,7 @@ ThemeData lightTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(primary: AppColor.primary)),
   inputDecorationTheme: const InputDecorationTheme(
+    suffixIconColor: Color(0xff6200ee),
     fillColor: Colors.white,
     floatingLabelBehavior: FloatingLabelBehavior.auto,
     enabledBorder: OutlineInputBorder(

@@ -1,45 +1,49 @@
+import 'package:doemais/commons/models/endereco.model.dart';
+
 class Ong {
-  final int id;
-  final String titulo;
+  final String id;
+  final String nome;
   final String descricao;
-  final bool favorito;
+  final String email;
+  final dynamic dataInicial;
+  final dynamic dataFinal;
+  final int categoria;
+  final Map endereco;
+  bool favorito;
   final int campanhasAtivas;
   final int campanhasEncerradas;
+  final Map imagens;
+  final Map agenda;
 
   Ong(
       {required this.id,
-      required this.titulo,
+      required this.nome,
       required this.descricao,
       required this.favorito,
       required this.campanhasAtivas,
-      required this.campanhasEncerradas});
+      required this.campanhasEncerradas,
+      required this.email,
+      required this.dataInicial,
+      required this.dataFinal,
+      required this.categoria,
+      required this.endereco,
+      required this.imagens,
+      required this.agenda});
 
-  factory Ong.fromJson(Map<String, dynamic> json) {
+  factory Ong.fromJson(Map json) {
     return Ong(
-        id: json['id'],
-        titulo: json['titulo'],
+        id: json['uid'],
+        nome: json['nome'],
         descricao: json['descricao'],
-        favorito: json['apoio'],
+        favorito: json['favorito'],
         campanhasAtivas: json['campanhasAtivas'],
-        campanhasEncerradas: json['campanhasAtivas']);
+        campanhasEncerradas: json['campanhasAtivas'],
+        email: json['email'],
+        dataFinal: json['dataFinal'],
+        dataInicial: json['dataInicial'],
+        categoria: json['categoria'],
+        endereco: json['endereco'],
+        imagens: json['imagens'],
+        agenda: json['agenda']);
   }
 }
-
-List<Ong> allOngs = [
-  Ong(
-      id: 1,
-      titulo: "SPASO - Associação Protetora Dos Animais",
-      descricao:
-          "A SPASO é uma entidade sem fins lucrativos, que se mantém com a ajuda de seus colaboradores e através de doações.",
-      favorito: false,
-      campanhasAtivas: 1,
-      campanhasEncerradas: 10),
-  Ong(
-      id: 2,
-      titulo: "PET SHOP DA ESQUINA",
-      descricao:
-          "Pet shop dos truta da quebrada que ajuda os cachorros e gatos da região.",
-      favorito: true,
-      campanhasAtivas: 2,
-      campanhasEncerradas: 3)
-];

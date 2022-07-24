@@ -48,7 +48,7 @@ class _CardInteresseDetalhadoState extends State<CardInteresseDetalhado> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: Text(
-                        widget.interesse.ongId,
+                        widget.interesse.ong.nome,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

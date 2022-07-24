@@ -1,26 +1,19 @@
 import 'package:doemais/interesse/models/endereco-interesse.model.dart';
+import 'package:doemais/interesse/models/ong-interesse.model.dart';
 
 class Interesse {
-  final String id;
-  final String nome;
-  final String descricao;
-  final String ongId;
-  final Map<String, dynamic> imagens;
-  final String dataInicial;
-  final String dataFinal;
-  final bool apoio;
-  final EnderecoInteresse endereco;
+  late String id;
+  late String nome;
+  late String descricao;
+  late String ongId;
+  late Map<String, dynamic> imagens;
+  late String dataInicial;
+  late String dataFinal;
+  late bool apoio;
+  late EnderecoInteresse endereco;
+  late OngInteresse ong = OngInteresse();
 
-  const Interesse(
-      {required this.id,
-      required this.nome,
-      required this.descricao,
-      required this.ongId,
-      required this.imagens,
-      required this.dataInicial,
-      required this.dataFinal,
-      required this.apoio,
-      required this.endereco});
+  Interesse();
 
   factory Interesse.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> enderecoJson = json['endereco'];
@@ -33,15 +26,18 @@ class Interesse {
         localidade: enderecoJson['localidade'],
         uf: enderecoJson['uf']);
 
-    return Interesse(
-        id: json['_id'],
-        nome: json['nome'],
-        descricao: json['descricao'],
-        ongId: json['ong'],
-        imagens: json['imagens'],
-        dataInicial: json['dataInicial'],
-        dataFinal: json['dataFinal'],
-        apoio: json['apoio'],
-        endereco: endereco);
+    Interesse interesse = Interesse();
+
+    interesse.id = json['_id'];
+    interesse.nome = json['nome'];
+    interesse.descricao = json['descricao'];
+    interesse.ongId = json['ong'];
+    interesse.imagens = json['imagens'];
+    interesse.dataInicial = json['dataInicial'];
+    interesse.dataFinal = json['dataFinal'];
+    interesse.apoio = json['apoio'];
+    interesse.endereco = endereco;
+
+    return interesse;
   }
 }

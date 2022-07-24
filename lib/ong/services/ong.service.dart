@@ -26,4 +26,11 @@ class OngService {
     return List<CategoriaOng>.from(
         objJson.map((data) => CategoriaOng.fromJson(data)));
   }
+
+  Future<Ong> getOng(String id) async {
+    Response response = await HttpHandler.get('${Endpoints.ong}/$id');
+    final body = json.decode(response.body)['ong'];
+
+    return Ong.fromJson(body);
+  }
 }

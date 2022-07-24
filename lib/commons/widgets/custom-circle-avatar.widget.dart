@@ -20,7 +20,7 @@ class _CustomCircleAvatarWidgetState extends State<CustomCircleAvatarWidget> {
         return const AssetImage('lib/assets/images/no-image.jpg');
       }
 
-      return NetworkImage(Endpoints.getArquivo(icon));
+      return NetworkImage(Endpoints.getArquivoAvatar(icon));
     }
 
     return Padding(

@@ -23,7 +23,7 @@ class Endpoints {
   // INTERESSES
   static const String interesses = "${Endpoints.campanha}/interesses";
 
-  static String getArquivo(String nome) {
-    return "https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/$nome";
+  static String getArquivoAvatar(String nome) {
+    return "$baseUrl/imagens/ongs/avatar/$nome";
   }
 }

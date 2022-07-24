@@ -1,3 +1,5 @@
+import 'package:doemais/commons/models/agenda.model.dart';
+import 'package:doemais/commons/models/endereco.model.dart';
 import 'package:doemais/theme/app-color.dart';
 import 'package:flutter/material.dart';
 
@@ -7,22 +9,21 @@ class DetalhesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Detalhes da Campanha',
       home: buildHomePage('Detalhes da Campanha'),
     );
   }
 
   Widget buildHomePage(String title) {
     const titleText = Padding(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: Text(
         'Doação de Rações',
-        style: TextStyle(fontSize: 20, color: AppColor.primary),
+        style: TextStyle(fontSize: 20),
       ),
     );
 
-    const subTitle = Padding(
-        padding: EdgeInsets.all(20),
+    const description = Padding(
+        padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
         child: Text(
           'Abertura de nova campanha para doações para instituições e abrigos de animais '
           'que necessitam de seu apoio, atualmente são 1200 cachorros e 200 gatos em, '
@@ -37,24 +38,14 @@ class DetalhesScreen extends StatelessWidget {
 
     final texto = Container(
       child: Column(
-        children: [titleText, subTitle],
+        children: [titleText, description],
       ),
     );
 
-    const imagem = Image.network(
+    final imagem = Image.network(
       'https://picsum.photos/250?image=9',
       width: 125,
       height: 125,
-    );
-
-    const apoiadores = Row(
-      children: [
-        Icon(
-          const Icon(Icons.add_location),
-          size: 50,
-          color: AppColor.primary,
-        )
-      ],
     );
 
     return Scaffold(
@@ -66,7 +57,18 @@ class DetalhesScreen extends StatelessWidget {
           child: Card(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [texto, imagem, apoiadores],
+              children: [
+                Container(
+                  child: Column(
+                    children: [titleText, description],
+                  ),
+                ),
+                Image.network(
+                  'https://picsum.photos/250?image=9',
+                  width: 125,
+                  height: 125,
+                )
+              ],
             ),
           ),
         ),

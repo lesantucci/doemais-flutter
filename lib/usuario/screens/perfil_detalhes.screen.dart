@@ -1,5 +1,5 @@
 import 'package:doemais/commons/widgets/title.dart';
-import 'package:doemais/interesse/widgets/utlitmos-interesses.widget.dart';
+import 'package:doemais/interesse/widgets/ultimos-interesses.widget.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/models/usuario.model.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,9 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: Center(
           child: SizedBox(
         width: double.infinity,
         child: Column(
@@ -32,22 +33,10 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: Row(
-                  children: [
+                  children: const [
                     SizedBox(
                       height: 50,
-                      child: TextButton.icon(
-                        icon: const Icon(
-                          Icons.dehaze,
-                          size: 24.0,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          padding: const EdgeInsets.all(0),
-                        ),
-                        onPressed: retornar,
-                        label: const Text('Perfil'),
-                      ),
+                      child: CustomTitle(texto: 'Perfil'),
                     ),
                   ],
                 ),

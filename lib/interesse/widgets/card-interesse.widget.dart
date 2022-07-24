@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:doemais/commons/endpoints.dart';
 import 'package:doemais/commons/widgets/custom-circle-avatar.widget.dart';
 import 'package:doemais/interesse/models/interesse.model.dart';

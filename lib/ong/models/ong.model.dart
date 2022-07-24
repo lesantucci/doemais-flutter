@@ -9,7 +9,7 @@ class Ong {
   final dynamic dataFinal;
   final int categoria;
   final Map endereco;
-  final bool favorito;
+  bool favorito;
   final int campanhasAtivas;
   final int campanhasEncerradas;
   final Map imagens;

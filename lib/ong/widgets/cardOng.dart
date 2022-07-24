@@ -1,3 +1,4 @@
+import '../controller/Filter.controller.dart';
 import '../models/ong.model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,19 +6,18 @@ import '../services/ong.service.dart';
 
 class CardOng extends StatefulWidget {
   final Ong ong;
+  FilterController filterController;
 
-  const CardOng({Key? key, required this.ong}) : super(key: key);
+  CardOng({Key? key, required this.ong, required this.filterController})
+      : super(key: key);
 
   @override
-  State<CardOng> createState() => _CardOngState(
-      favorito: ong.favorito, imagem: ong.imagens['avatar'].toString());
+  State<CardOng> createState() => _CardOngState();
 }
 
 class _CardOngState extends State<CardOng> {
-  bool favorito;
-  String imagem;
   final OngService ongService = OngService();
-  _CardOngState({Key? key, required this.favorito, required this.imagem});
+  _CardOngState({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _CardOngState extends State<CardOng> {
                           width: 100,
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                'https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/$imagem'),
+                                'https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/${super.widget.ong.imagens['avatar']}'),
                             radius: 220,
                           ),
                         )),
@@ -58,7 +58,7 @@ class _CardOngState extends State<CardOng> {
                                     super.widget.ong.nome,
                                   ),
                                 )),
-                                favorito
+                                super.widget.ong.favorito
                                     ? IconButton(
                                         icon: const Icon(Icons.star),
                                         color: Colors.purple,
@@ -70,7 +70,11 @@ class _CardOngState extends State<CardOng> {
                                             try {
                                               ongService.favoritar(
                                                   super.widget.ong.id);
-                                              favorito = false;
+                                              super
+                                                  .widget
+                                                  .filterController
+                                                  .atualizarFav(
+                                                      super.widget.ong);
                                             } catch (e) {
                                               rethrow;
                                             }
@@ -88,7 +92,11 @@ class _CardOngState extends State<CardOng> {
                                             try {
                                               ongService.favoritar(
                                                   super.widget.ong.id);
-                                              favorito = true;
+                                              super
+                                                  .widget
+                                                  .filterController
+                                                  .atualizarFav(
+                                                      super.widget.ong);
                                             } catch (e) {
                                               rethrow;
                                             }

@@ -65,4 +65,19 @@ class FilterController extends ChangeNotifier {
     listaFiltrada = suggestions;
     notifyListeners();
   }
+
+  void atualizarFav(Ong ong) {
+    ong.favorito = !ong.favorito;
+    lista[lista.indexWhere((element) => element.id == ong.id)] = ong;
+    var suggestions = lista;
+
+    if (onlyFav) {
+      suggestions = lista.where((ong) {
+        return ong.favorito;
+      }).toList();
+    }
+    listaFiltrada = suggestions;
+
+    notifyListeners();
+  }
 }

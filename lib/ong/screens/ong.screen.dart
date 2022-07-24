@@ -74,8 +74,10 @@ class _OngScreenState extends State<OngScreen> {
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: local.listaFiltrada.length,
-                            itemBuilder: (context, index) =>
-                                CardOng(ong: local.listaFiltrada[index])))
+                            itemBuilder: (context, index) => CardOng(
+                                  ong: local.listaFiltrada[index],
+                                  filterController: local,
+                                )))
                   ])));
         }));
   }

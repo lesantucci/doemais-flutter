@@ -9,7 +9,7 @@ class Campanha {
   final Map imagens;
   final Endereco endereco;
   final int apoiadores;
-  final bool apoio;
+  bool apoio;
   final Agenda agenda;
   final String dataInicial;
   final String dataFinal;

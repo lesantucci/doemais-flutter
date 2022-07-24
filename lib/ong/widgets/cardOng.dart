@@ -1,10 +1,12 @@
 import '../models/ong.model.dart';
 import 'package:flutter/material.dart';
 
+import '../services/ong.service.dart';
+
 class CardOng extends StatefulWidget {
   final Ong ong;
 
-  CardOng({Key? key, required this.ong}) : super(key: key);
+  const CardOng({Key? key, required this.ong}) : super(key: key);
 
   @override
   State<CardOng> createState() => _CardOngState(
@@ -14,6 +16,7 @@ class CardOng extends StatefulWidget {
 class _CardOngState extends State<CardOng> {
   bool favorito;
   String imagem;
+  final OngService ongService = OngService();
   _CardOngState({Key? key, required this.favorito, required this.imagem});
 
   @override
@@ -64,7 +67,13 @@ class _CardOngState extends State<CardOng> {
                                         alignment: const Alignment(0, -5),
                                         onPressed: () async {
                                           setState(() {
-                                            favorito = false;
+                                            try {
+                                              ongService.favoritar(
+                                                  super.widget.ong.id);
+                                              favorito = false;
+                                            } catch (e) {
+                                              rethrow;
+                                            }
                                           });
                                         },
                                       )
@@ -76,7 +85,13 @@ class _CardOngState extends State<CardOng> {
                                         alignment: const Alignment(0, -5),
                                         onPressed: () async {
                                           setState(() {
-                                            favorito = true;
+                                            try {
+                                              ongService.favoritar(
+                                                  super.widget.ong.id);
+                                              favorito = true;
+                                            } catch (e) {
+                                              rethrow;
+                                            }
                                           });
                                         },
                                       ),

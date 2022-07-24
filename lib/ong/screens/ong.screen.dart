@@ -15,9 +15,9 @@ class OngScreen extends StatefulWidget {
 class _OngScreenState extends State<OngScreen> {
   late List<Ong> lista;
   List<Ong> listaFiltrada = [];
+  final OngService ongService = OngService();
 
   void _listarOngs() {
-    final ongService = OngService();
     ongService.pesquisar().then((list) => {
           setState(() {
             lista = list;

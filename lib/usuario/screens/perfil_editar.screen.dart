@@ -111,7 +111,7 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                               padding: const EdgeInsets.all(0),
                             ),
                             onPressed: retornar,
-                            label: const Text('Editar Perfil'),
+                            label: const Text('Voltar'),
                           ),
                         ),
                       ],

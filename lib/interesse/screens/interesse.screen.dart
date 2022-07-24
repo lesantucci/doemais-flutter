@@ -14,6 +14,9 @@ class _InteresseScreenState extends State<InteresseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Interesses"),
+      ),
       body: AnimatedBuilder(
         animation: InteresseController.instance,
         builder: (context, child) {
@@ -22,11 +25,6 @@ class _InteresseScreenState extends State<InteresseScreen> {
             width: double.infinity,
             child: Column(
               children: [
-                Row(
-                  children: const [
-                    CustomTitle(texto: 'Interesses'),
-                  ],
-                ),
                 SizedBox(
                   width: double.infinity,
                   child: ListView.builder(

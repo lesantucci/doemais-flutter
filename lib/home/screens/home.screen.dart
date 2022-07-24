@@ -1,7 +1,7 @@
 import 'package:doemais/campanha/screens/campanha.screen.dart';
 import 'package:doemais/interesse/controller/interesse.controller.dart';
 import 'package:doemais/interesse/screens/interesse.screen.dart';
-import 'package:doemais/interesse/services/interesse.services.dart';
+import 'package:doemais/interesse/services/interesse.service.dart';
 import 'package:doemais/ong/screens/ong.screen.dart';
 import 'package:doemais/theme/app-color.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';

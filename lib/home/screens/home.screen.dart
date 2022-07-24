@@ -1,10 +1,10 @@
 import 'package:doemais/campanha/screens/campanha.screen.dart';
 import 'package:doemais/interesse/controller/interesse.controller.dart';
+import 'package:doemais/interesse/screens/interesse.screen.dart';
 import 'package:doemais/interesse/services/interesse.services.dart';
 import 'package:doemais/ong/screens/ong.screen.dart';
 import 'package:doemais/theme/app-color.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
-import 'package:doemais/usuario/screens/interesse.screen.dart';
 import 'package:doemais/usuario/screens/perfil.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void selecionarTela(int index) {
     setState(() => currentIndex = index);
 
-    // Perfil
     if (index == 3) {
+      // Perfil
       carregarPerfil();
+      carregarListaDeInteresses();
+    } else if (index == 2) {
+      // Interesse
       carregarListaDeInteresses();
     }
   }

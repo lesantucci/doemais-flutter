@@ -18,7 +18,7 @@ class Endpoints {
   static const String ongCapanha = "$baseUrl/ong/campanha";
   static const String ongFavoritar = "$baseUrl/ong/favorita";
 
-  static const String categoria = "$baseUrl/categoria";
+  static const String categoriaONG = "$baseUrl/categorias/ONG";
 
   // INTERESSES
   static const String interesses = "${Endpoints.campanha}/interesses";

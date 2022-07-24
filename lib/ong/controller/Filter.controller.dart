@@ -10,6 +10,7 @@ class FilterController extends ChangeNotifier {
   List<int> categoriaFiltrada = [];
   final OngService ongService = OngService();
   bool onlyFav = false;
+  List<CategoriaOng> categorias = [];
 
   FilterController() {
     ongService.pesquisar().then(
@@ -19,6 +20,9 @@ class FilterController extends ChangeNotifier {
         notifyListeners();
       },
     );
+    ongService.pesquisarCategorias().then((list) {
+      categorias = list;
+    });
   }
 
   void searchOng(String query) {

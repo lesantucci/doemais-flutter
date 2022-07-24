@@ -1,8 +1,8 @@
 import 'package:doemais/ong/models/categorias.model.dart';
+import 'package:doemais/ong/services/ong.service.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/Filter.controller.dart';
-import '../models/ong.model.dart';
 
 class ongFiltersScreen extends StatefulWidget {
   FilterController filterController;
@@ -14,7 +14,8 @@ class ongFiltersScreen extends StatefulWidget {
 }
 
 class _ongFiltersScreenState extends State<ongFiltersScreen> {
-  List<CategoriaOng> categorias = Allcategorias;
+  OngService ongService = OngService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,25 +39,44 @@ class _ongFiltersScreenState extends State<ongFiltersScreen> {
                           child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              itemCount: categorias.length,
+                              itemCount: super
+                                  .widget
+                                  .filterController
+                                  .categorias
+                                  .length,
                               itemBuilder: (context, index) => Row(
                                     children: [
                                       Checkbox(
-                                        value: categorias[index].checked,
+                                        value: super
+                                            .widget
+                                            .filterController
+                                            .categorias[index]
+                                            .checked,
                                         onChanged: (value) {
                                           setState(() {
-                                            categorias[index].checked = value!;
                                             super
                                                 .widget
                                                 .filterController
-                                                .searchOngByCategory(
-                                                    categorias[index]);
+                                                .categorias[index]
+                                                .checked = value!;
+                                            super
+                                                .widget
+                                                .filterController
+                                                .searchOngByCategory(super
+                                                    .widget
+                                                    .filterController
+                                                    .categorias[index]);
                                           });
                                         },
                                       ),
                                       Padding(
                                           padding: const EdgeInsets.all(7),
-                                          child: Text(categorias[index].titulo,
+                                          child: Text(
+                                              super
+                                                  .widget
+                                                  .filterController
+                                                  .categorias[index]
+                                                  .titulo,
                                               style: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w700,

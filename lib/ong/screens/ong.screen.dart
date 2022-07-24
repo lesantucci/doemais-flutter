@@ -1,6 +1,6 @@
 import 'package:doemais/ong/controller/Filter.controller.dart';
 import 'package:doemais/ong/models/ong.model.dart';
-import 'package:doemais/ong/screens/ongFilters.screen.dart';
+import 'package:doemais/ong/widgets/ongFilters.screen.dart';
 import 'package:doemais/ong/services/ong.service.dart';
 import 'package:doemais/ong/widgets/cardOng.dart';
 import 'package:flutter/cupertino.dart';

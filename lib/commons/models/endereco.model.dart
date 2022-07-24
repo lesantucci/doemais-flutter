@@ -29,4 +29,9 @@ class Endereco {
         latitude: json['latitude'],
         longitude: json['longitude']);
   }
+
+  @override
+  String toString() {
+    return "$logradouro,$bairro${',$complemento'}, $localidade-$uf $cep";
+  }
 }

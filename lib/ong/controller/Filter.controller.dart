@@ -55,13 +55,14 @@ class FilterController extends ChangeNotifier {
   }
 
   void searchOngByFav() {
+    var suggestions = lista;
     onlyFav = !onlyFav;
     if (onlyFav) {
-      final suggestions = lista.where((ong) {
+      suggestions = lista.where((ong) {
         return ong.favorito;
       }).toList();
-      listaFiltrada = suggestions;
     }
+    listaFiltrada = suggestions;
     notifyListeners();
   }
 }

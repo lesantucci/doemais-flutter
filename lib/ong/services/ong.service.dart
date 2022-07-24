@@ -23,7 +23,6 @@ class OngService {
   Future<List<CategoriaOng>> pesquisarCategorias() async {
     Response response = await HttpHandler.get(Endpoints.categoriaONG);
     final objJson = json.decode(response.body)['categorias'];
-    print(objJson);
     return List<CategoriaOng>.from(
         objJson.map((data) => CategoriaOng.fromJson(data)));
   }

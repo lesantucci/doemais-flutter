@@ -1,4 +1,3 @@
-import 'package:doemais/commons/endpoints.dart';
 import 'package:doemais/commons/widgets/custom-circle-avatar.widget.dart';
 import 'package:doemais/interesse/models/endereco-interesse.model.dart';
 import 'package:doemais/interesse/models/interesse.model.dart';
@@ -29,8 +28,7 @@ class _CardInteresseDetalhadoState extends State<CardInteresseDetalhado> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CustomCircleAvatarWidget(
-                icon: Endpoints.getArquivo(widget.interesse.imagens['avatar'])),
+            CustomCircleAvatarWidget(icon: widget.interesse.imagens['avatar']),
             Expanded(
               flex: 1,
               child: Container(

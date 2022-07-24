@@ -1,4 +1,3 @@
-import 'package:doemais/commons/endpoints.dart';
 import 'package:doemais/commons/widgets/custom-circle-avatar.widget.dart';
 import 'package:doemais/interesse/models/interesse.model.dart';
 import 'package:doemais/theme/app-color.dart';
@@ -23,8 +22,7 @@ class _CardInteresseState extends State<CardInteresse> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomCircleAvatarWidget(
-                icon: Endpoints.getArquivo(widget.interesse.imagens['avatar'])),
+            CustomCircleAvatarWidget(icon: widget.interesse.imagens['avatar']),
             Padding(
               padding: const EdgeInsets.all(5),
               child: Text(

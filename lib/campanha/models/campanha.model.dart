@@ -2,18 +2,18 @@ import 'package:doemais/commons/models/agenda.model.dart';
 import 'package:doemais/commons/models/endereco.model.dart';
 
 class Campanha {
-  final int id;
-  final Map<String, dynamic> ong;
+  final String id;
+  final Map ong;
   final String nome;
   final String descricao;
-  final Map<String, dynamic> imagens;
+  final Map imagens;
   final Endereco endereco;
   final int apoiadores;
   final bool apoio;
   final Agenda agenda;
   final String dataInicial;
   final String dataFinal;
-  final String categoria;
+  final int categoria;
   final int status;
 
   Campanha(
@@ -32,15 +32,15 @@ class Campanha {
       required this.status});
   factory Campanha.fromJson(Map<String, dynamic> json) {
     return Campanha(
-        id: json['id'],
+        id: json['_id'],
         ong: json['ong'],
         nome: json['nome'],
         descricao: json['descricao'],
         imagens: json['imagens'],
-        endereco: json['endereco'],
+        endereco: Endereco.fromJson(json['endereco']),
         apoiadores: json['apoiadores'],
         apoio: json['apoio'],
-        agenda: json['agenda'],
+        agenda: Agenda.fromJson(json['agenda']),
         dataInicial: json['dataInicial'],
         dataFinal: json['dataFinal'],
         categoria: json['categoria'],

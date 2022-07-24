@@ -1,16 +1,16 @@
 class Agenda {
-  final List<int> agenda;
+  final List<dynamic> atividade;
   final String horaInicio;
   final String horaFim;
 
   const Agenda(
-      {required this.agenda,
+      {required this.atividade,
       required this.horaInicio,
       required this.horaFim});
 
   factory Agenda.fromJson(Map<String, dynamic> json) {
     return Agenda(
-        agenda: json['agenda'],
+        atividade: json['atividade'],
         horaInicio: json['horaInicio'],
         horaFim: json['horaFim']);
   }

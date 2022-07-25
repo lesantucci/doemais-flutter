@@ -3,13 +3,14 @@ import 'package:doemais/commons/models/endereco.model.dart';
 
 class Campanha {
   final String id;
-  final Map ong;
+  final dynamic ong;
+  final String ongNome;
   final String nome;
   final String descricao;
   final Map imagens;
   final Endereco endereco;
   final int apoiadores;
-  final bool apoio;
+  bool apoio;
   final Agenda agenda;
   final String dataInicial;
   final String dataFinal;
@@ -19,6 +20,7 @@ class Campanha {
   Campanha(
       {required this.id,
       required this.ong,
+      required this.ongNome,
       required this.nome,
       required this.descricao,
       required this.imagens,
@@ -34,6 +36,7 @@ class Campanha {
     return Campanha(
         id: json['_id'],
         ong: json['ong'],
+        ongNome: json['ongNome'],
         nome: json['nome'],
         descricao: json['descricao'],
         imagens: json['imagens'],

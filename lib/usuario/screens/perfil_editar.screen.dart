@@ -19,26 +19,20 @@ class PerfilEditarScreen extends StatefulWidget {
 }
 
 class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
-  var txtNome = TextEditingController();
-  var txtDtNascimento = TextEditingController();
-  var txtContato = TextEditingController();
-
-  var txtSenhaAntiga = TextEditingController();
-  var txtNovaSenha = TextEditingController();
-  var txtConfirmacaoSenha = TextEditingController();
-
   final dropdownSexoState = GlobalKey<FormFieldState>();
-
-  String _sexo = 'Feminino';
+  String _nome = "";
+  String _dtNascimento = "";
+  String _sexo = "";
+  String _contato = "";
 
   final usuarioService = UsuarioService();
 
   void salvar() {
     final usuario = Usuario();
-    usuario.nome = txtNome.text;
-    usuario.sexo = _sexo;
-    usuario.dtNascimento = txtDtNascimento.text;
-    usuario.contato = txtContato.text;
+    usuario.nome = _nome == "" ? widget.usuario.nome : _nome;
+    usuario.sexo =  _sexo == "" ? widget.usuario.sexo : _sexo;
+    usuario.dtNascimento =  _dtNascimento == "" ? widget.usuario.dtNascimento : _dtNascimento;
+    usuario.contato =  _contato == "" ? widget.usuario.contato : _contato;
 
     usuarioService.atualizarPerfil(usuario).then((success) {
       String message = 'Perfil salvo com sucesso!';
@@ -46,27 +40,7 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
         message = 'Não foi possível salvar o perfil';
       }
       final snackbar = SnackBar(content: Text(message));
-
-      PerfilController.instance.changeUsuario(usuario);
-
       ScaffoldMessenger.of(context).showSnackBar(snackbar);
-    });
-  }
-
-  void alterarSenha() {}
-
-  @override
-  void didUpdateWidget(covariant PerfilEditarScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    setState(() {
-      txtNome.text = widget.usuario.nome;
-      txtDtNascimento.text = widget.usuario.dtNascimento;
-      txtContato.text = widget.usuario.contato;
-
-      if (widget.usuario.sexo != '') {
-        dropdownSexoState.currentState?.didChange(widget.usuario.sexo);
-      }
     });
   }
 
@@ -83,7 +57,9 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("Editar Perfil"),
+      ),
       body: Container(
         margin: const EdgeInsets.only(bottom: 20),
         child: SingleChildScrollView(
@@ -97,27 +73,6 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: Row(
-                      children: [
-                        SizedBox(
-                          height: 50,
-                          child: TextButton.icon(
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              size: 24.0,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(0),
-                            ),
-                            onPressed: retornar,
-                            label: const Text('Editar Perfil'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Row(
                       children: const [
                         Padding(
                           padding: EdgeInsets.only(bottom: 10, top: 10),
@@ -126,7 +81,18 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                       ],
                     ),
                   ),
-                  CustomTextField(controller: txtNome, label: "Nome"),
+                  TextFormField(
+                    initialValue: widget.usuario.nome,
+                    onChanged: (text) {
+                      setState(() {
+                        _nome = text;
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Nome',
+                    ),
+                  )
+                  ,
                   Padding(
                     padding: const EdgeInsets.all(0),
                     child: Row(
@@ -137,9 +103,17 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child: CustomTextField(
-                                  controller: txtDtNascimento,
-                                  label: "Data de nascimento"),
+                              child: TextFormField(
+                                initialValue: widget.usuario.dtNascimento,
+                                onChanged: (text) {
+                                  setState(() {
+                                    _dtNascimento = text;
+                                  });
+                                },
+                                decoration: const InputDecoration(
+                                  labelText: 'Data Nascimento',
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -151,14 +125,28 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                                 label: "Sexo",
                                 state: dropdownSexoState,
                                 lista: listaSexo,
-                                onChanged: onChangedSexo,
-                                value: _sexo),
+                                onChanged: (value) => {
+                                  setState(() => {
+                                    _sexo = value
+                                  })
+                                },
+                                value: widget.usuario.sexo),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  CustomTextField(controller: txtContato, label: "Contato"),
+                 TextFormField(
+                    initialValue: widget.usuario.contato,
+                    onChanged: (text) {
+                      setState(() {
+                        _contato = text;
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Contato',
+                    ),
+                  ),
                   FractionallySizedBox(
                     widthFactor: 1,
                     child: Row(
@@ -183,8 +171,13 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                       ],
                     ),
                   ),
-                  CustomTextField(
-                      controller: txtSenhaAntiga, label: "Senha antiga"),
+                  TextFormField(
+                    obscureText: true,
+                    onChanged: (text) {},
+                    decoration: const InputDecoration(
+                      labelText: 'Senha Antiga',
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(0),
                     child: Row(
@@ -195,9 +188,13 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child: CustomTextField(
-                                  controller: txtNovaSenha,
-                                  label: "Nova senha"),
+                              child:  TextFormField(
+                                obscureText: true,
+                                onChanged: (text) {},
+                                decoration: const InputDecoration(
+                                  labelText: 'Nova Senha',
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -207,9 +204,13 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5),
-                              child: CustomTextField(
-                                  controller: txtConfirmacaoSenha,
-                                  label: "Repetir nova senha"),
+                              child:  TextFormField(
+                                obscureText: true,
+                                onChanged: (text) {},
+                                decoration: const InputDecoration(
+                                  labelText: 'Repetir Nova Senha',
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -225,7 +226,9 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             height: 50,
                             width: 180,
                             child: CustomButton(
-                                text: 'ALTERAR SENHA', onPressed: alterarSenha))
+                                text: 'ALTERAR SENHA', onPressed: () => {
+
+                                }))
                       ],
                     ),
                   ),

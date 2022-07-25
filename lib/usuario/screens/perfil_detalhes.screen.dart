@@ -2,14 +2,14 @@ import 'package:doemais/commons/widgets/title.dart';
 import 'package:doemais/interesse/widgets/ultimos-interesses.widget.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/models/usuario.model.dart';
+import 'package:doemais/usuario/screens/perfil_editar.screen.dart';
+import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';
 
 final List<String> listaSexo = ['Feminino', 'Masculino'];
 
 class PerfilDetalhesScreen extends StatefulWidget {
-  final Usuario usuario;
-
-  const PerfilDetalhesScreen(this.usuario, {super.key});
+  const PerfilDetalhesScreen({super.key});
 
   @override
   State<PerfilDetalhesScreen> createState() => _PerfilDetalhesScreenState();
@@ -17,6 +17,21 @@ class PerfilDetalhesScreen extends StatefulWidget {
 
 class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
   void retornar() {}
+
+  final UsuarioService service = UsuarioService();
+  late Usuario usuario = Usuario();
+
+  void carregaUsuarioPerfil() {
+    service
+        .consultarPerfil()
+        .then((response) => {setState(() => usuario = response)});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    carregaUsuarioPerfil();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +58,6 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                   child: Card(
                     child: Container(
                       width: double.infinity,
-                      decoration: ShapeDecoration.fromBoxDecoration(
-                          BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.lightBlueAccent))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -61,7 +72,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                               ),
                               child: Center(
                                 child: Text(
-                                  widget.usuario.iniciais,
+                                  usuario.iniciais,
                                   style: const TextStyle(
                                       color: Color(0xff6200ee),
                                       fontSize: 42,
@@ -78,12 +89,15 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, bottom: 5),
+                                        left: 10,
+                                      top: 5,
+                                      right: 10,
+                                      bottom: 5,),
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: Text(
-                                        widget.usuario.nome,
-                                        textAlign: TextAlign.center,
+                                        usuario.nome,
+                                        textAlign: TextAlign.start,
                                         style: const TextStyle(
                                           color: Color(0xff6200ee),
                                           fontWeight: FontWeight.bold,
@@ -103,7 +117,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                         Expanded(
                                           flex: 1,
                                           child: Text(
-                                            widget.usuario.dtNascimento,
+                                            usuario.dtNascimento,
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -111,7 +125,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                         Expanded(
                                           flex: 1,
                                           child: Text(
-                                            widget.usuario.sexo,
+                                            usuario.sexo,
                                             textAlign: TextAlign.right,
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
@@ -130,7 +144,7 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: Text(
-                                        widget.usuario.contato,
+                                        usuario.contato,
                                         textAlign: TextAlign.right,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
@@ -149,9 +163,11 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                               width: 120,
                                               child: TextButton(
                                                 onPressed: () {
-                                                  PerfilController.instance
-                                                      .changePage(PerfilController
-                                                          .perfilEditarScreen);
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => PerfilEditarScreen(usuario)),
+                                                  );
                                                 },
                                                 style: ButtonStyle(
                                                   backgroundColor:

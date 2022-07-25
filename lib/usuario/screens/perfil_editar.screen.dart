@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:doemais/commons/widgets/custom_button.dart';
-import 'package:doemais/commons/widgets/custom_dropdown.dart';
 import 'package:doemais/commons/widgets/title.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/models/usuario.model.dart';
@@ -141,18 +138,29 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                           ),
                         ),
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5, top: 10),
-                            child: CustomDropdown(
-                                label: "Sexo",
-                                state: dropdownSexoState,
-                                lista: listaSexo,
-                                onChanged: (value) => {
-                                      setState(() => {_sexo = value})
-                                    },
-                                value: widget.usuario.sexo),
+                            child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 5, top: 20, bottom: 20),
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: "Sexo",
+                            ),
+                            elevation: 16,
+                            //key: widget.state,
+                            items: listaSexo
+                                .map<DropdownMenuItem<String>>((value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              _sexo = value!;
+                            },
+                            //value: 'widget.usuario.sexo',
                           ),
-                        ),
+                        )),
                       ],
                     ),
                   ),

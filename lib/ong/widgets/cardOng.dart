@@ -44,7 +44,7 @@ class _CardOngState extends State<CardOng> {
                               width: 100,
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                    'https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/${super.widget.ong.imagens['avatar']}'),
+                                    getImagemUrl(super.widget.ong)),
                                 radius: 220,
                               ),
                             )),
@@ -193,5 +193,16 @@ class _CardOngState extends State<CardOng> {
                             )),
                       ],
                     )))));
+  }
+
+  String getImagemUrl(Ong ong) {
+    String path =
+        'https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/avatar/';
+    var imagem = ong.imagens['avatar'];
+    if (imagem != '') {
+      return path + imagem;
+    } else {
+      return '${path}a';
+    }
   }
 }

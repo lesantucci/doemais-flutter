@@ -3,7 +3,6 @@ import 'package:doemais/commons/models/endereco.model.dart';
 
 class Campanha {
   final String id;
-  final Map ong;
   final String nome;
   final String descricao;
   final Map imagens;
@@ -18,7 +17,6 @@ class Campanha {
 
   Campanha(
       {required this.id,
-      required this.ong,
       required this.nome,
       required this.descricao,
       required this.imagens,
@@ -33,7 +31,6 @@ class Campanha {
   factory Campanha.fromJson(Map<String, dynamic> json) {
     return Campanha(
         id: json['_id'],
-        ong: json['ong'],
         nome: json['nome'],
         descricao: json['descricao'],
         imagens: json['imagens'],

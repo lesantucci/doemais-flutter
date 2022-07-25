@@ -60,7 +60,8 @@ class CardCampanha extends StatelessWidget {
                                         text: TextSpan(
                                             text: campanha.descricao,
                                             style: const TextStyle(
-                                                fontSize: 12)))),
+                                                fontSize: 12,
+                                                color: Colors.grey)))),
                                 const Spacer(),
                                 Row(
                                   children: [

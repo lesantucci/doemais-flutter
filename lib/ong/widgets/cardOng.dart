@@ -118,12 +118,11 @@ class _CardOngState extends State<CardOng> {
                                 ),
                                 Expanded(
                                     child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 2, left: 5),
+                                  padding: const EdgeInsets.only(left: 5),
                                   child: Text(
                                     super.widget.ong.descricao,
                                     style: const TextStyle(
-                                        fontSize: 8,
+                                        fontSize: 12,
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold),
                                   ),

@@ -1,5 +1,6 @@
 import 'package:doemais/campanha/models/campanha.model.dart';
 import 'package:doemais/campanha/services/campanha.service.dart';
+import 'package:doemais/ong/screens/ongDetail.screen.dart';
 
 import 'package:doemais/theme/app-color.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,11 @@ class DetalhesScreen extends StatefulWidget {
 class _DetalhesScreenState extends State<DetalhesScreen> {
   late Campanha campanha = Campanha();
   late List<dynamic> imagens = [];
+  bool _disable = false;
+  final CampanhaService service = CampanhaService();
 
   void carregarCampanha() {
-    var campanhaService = CampanhaService();
-    campanhaService.pesquisarCampanha(widget.id).then((response) => {
+    service.pesquisarCampanha(widget.id).then((response) => {
           setState(() {
             campanha = response;
             imagens = campanha.imagens['galeria'];
@@ -31,6 +33,18 @@ class _DetalhesScreenState extends State<DetalhesScreen> {
   void initState() {
     super.initState();
     carregarCampanha();
+  }
+
+  void apoiarClicked() {
+    _disable = true;
+    service.apoiar(campanha.id).then((res) => {
+          setState(() {
+            if (res) {
+              campanha.apoio = campanha.apoio ? false : true;
+            }
+            _disable = false;
+          })
+        });
   }
 
   @override
@@ -123,28 +137,36 @@ class _DetalhesScreenState extends State<DetalhesScreen> {
                     children: <Widget>[
                       Expanded(
                           child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: SizedBox(
                                 height: 50,
                                 width: 100,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            OngDetailScreen(id: campanha.ong));
+                                  },
                                   child: const Text('Sobre a ONG'),
                                 ),
                               ))),
                       Expanded(
                           child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: SizedBox(
                                 height: 50,
-                                width: 150,
+                                width: 100,
                                 child: ElevatedButton.icon(
-                                  icon: const Icon(
-                                    Icons.favorite_border,
-                                    size: 24.0,
+                                  icon: Icon(
+                                    !campanha.apoio
+                                        ? Icons.favorite
+                                        : Icons.heart_broken,
                                   ),
-                                  onPressed: () {},
-                                  label: const Text('Apoiar'),
+                                  onPressed:
+                                      _disable ? null : () => {apoiarClicked()},
+                                  label: Text(
+                                      !campanha.apoio ? "Apoiar" : 'Desapoiar'),
                                 ),
                               ))),
                     ],

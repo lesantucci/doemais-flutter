@@ -39,6 +39,6 @@ class OngService {
     String endpoint = '${Endpoints.ong}/$id';
     Response response = await HttpHandler.get(endpoint);
     final objJson = json.decode(response.body)['ong'];
-    return Future<Ong>(objJson.map((data) => Ong.fromJson(data)));
+    return Ong.fromJson(objJson);
   }
 }

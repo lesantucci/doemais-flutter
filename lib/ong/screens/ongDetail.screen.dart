@@ -157,11 +157,14 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
   }
 
   String montarEndereco() {
-    String logradouro = ong.endereco['logradouro'];
-    String bairro = ong.endereco['bairro'];
-    String localidade = ong.endereco['localidade'];
-    String uf = ong.endereco['uf'];
+    if (ong.endereco.isNotEmpty) {
+      String logradouro = ong.endereco['logradouro'];
+      String bairro = ong.endereco['bairro'];
+      String localidade = ong.endereco['localidade'];
+      String uf = ong.endereco['uf'];
 
-    return '$logradouro - $bairro, $localidade - $uf';
+      return '$logradouro - $bairro, $localidade - $uf';
+    }
+    return '';
   }
 }

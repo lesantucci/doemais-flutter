@@ -21,7 +21,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
           return IndexedStack(
             index: PerfilController.instance.screenIndex,
             children: [
-              PerfilDetalhesScreen(PerfilController.instance.usuario),
+              //PerfilDetalhesScreen(PerfilController.instance.usuario),
               PerfilEditarScreen(PerfilController.instance.usuario)
             ],
           );

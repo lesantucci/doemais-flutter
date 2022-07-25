@@ -7,10 +7,8 @@ import '../../campanha/widgets/card_campanha.dart';
 import '../widgets/agendaWidget.dart';
 
 class OngDetailScreen extends StatefulWidget {
-  Ong ong;
-  List<dynamic> imagens;
-  OngDetailScreen({Key? key, required this.ong, required this.imagens})
-      : super(key: key);
+  String id;
+  OngDetailScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   State<OngDetailScreen> createState() => _OngDetailScreenState();
@@ -18,21 +16,33 @@ class OngDetailScreen extends StatefulWidget {
 
 class _OngDetailScreenState extends State<OngDetailScreen> {
   List<Campanha> listaCampanha = [];
+  OngService ongService = OngService();
+  late Ong ong = Ong();
+  late List<dynamic> imagens = [];
 
   void listarCampanhas() {
     var ongService = OngService();
-    ongService
-        .pesquiarCampanhasOng(super.widget.ong.id)
-        .then((listaResponse) => {
-              setState(() {
-                listaCampanha = listaResponse;
-              })
-            });
+    ongService.pesquiarCampanhasOng(widget.id).then((listaResponse) => {
+          setState(() {
+            listaCampanha = listaResponse;
+          })
+        });
+  }
+
+  void carregarOng() {
+    var ongService = OngService();
+    ongService.pesquisarOng(widget.id).then((response) => {
+          setState(() {
+            ong = response;
+            imagens = ong.imagens['galeria'];
+          })
+        });
   }
 
   @override
   void initState() {
     super.initState();
+    carregarOng();
     listarCampanhas();
   }
 
@@ -61,7 +71,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          super.widget.ong.nome,
+                          ong.nome,
                           style: const TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
@@ -71,7 +81,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                           padding: const EdgeInsets.only(top: 10, bottom: 20),
                           child: Expanded(
                             child: Text(
-                              super.widget.ong.descricao,
+                              ong.descricao,
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w600),
@@ -83,7 +93,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                             child: Expanded(
                                 child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: super.widget.imagens.length,
+                              itemCount: imagens.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Padding(
@@ -112,7 +122,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                           children: [
                             Expanded(
                                 child: Padding(
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     child: Text(
                                       montarEndereco(),
                                       style: const TextStyle(
@@ -141,7 +151,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
   String montarUrlFotos(int index) {
     String path =
         'https://apl-back-doe-mais-ong.herokuapp.com/imagens/ongs/galeria/';
-    String imagem = super.widget.imagens[index];
+    String imagem = imagens[index];
     if (imagem != '') {
       return path + imagem;
     }
@@ -149,11 +159,14 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
   }
 
   String montarEndereco() {
-    String logradouro = super.widget.ong.endereco['logradouro'];
-    String bairro = super.widget.ong.endereco['bairro'];
-    String localidade = super.widget.ong.endereco['localidade'];
-    String uf = super.widget.ong.endereco['uf'];
+    if (ong.endereco.isNotEmpty) {
+      String logradouro = ong.endereco['logradouro'];
+      String bairro = ong.endereco['bairro'];
+      String localidade = ong.endereco['localidade'];
+      String uf = ong.endereco['uf'];
 
-    return '$logradouro - $bairro, $localidade - $uf';
+      return '$logradouro - $bairro, $localidade - $uf';
+    }
+    return '';
   }
 }

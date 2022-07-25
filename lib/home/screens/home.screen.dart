@@ -6,6 +6,7 @@ import 'package:doemais/ong/screens/ong.screen.dart';
 import 'package:doemais/theme/app-color.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/screens/perfil.screen.dart';
+import 'package:doemais/usuario/screens/perfil_detalhes.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';
 
@@ -17,49 +18,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Widget> screens = [
+    CampanhaScreen(),
+    OngScreen(),
+    InteresseScreen(),
+    PerfilDetalhesScreen()
+  ];
+
   int currentIndex = 0;
-  final usuarioService = UsuarioService();
-  final interesseService = InteresseService();
-
-  void carregarPerfil() async {
-    usuarioService.consultarPerfil().then((response) {
-      PerfilController.instance.changeUsuario(response);
-    });
-  }
-
-  void carregarListaDeInteresses() {
-    interesseService.consultarListaDeInteresses().then((lista) {
-      InteresseController.instance.changeLista(lista);
-    });
-  }
-
-  void selecionarTela(int index) {
-    setState(() => currentIndex = index);
-
-    if (index == 3) {
-      // Perfil
-      carregarPerfil();
-      carregarListaDeInteresses();
-    } else if (index == 2) {
-      // Interesse
-      carregarListaDeInteresses();
-    }
-  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: IndexedStack(
-          index: currentIndex,
-          children: const <Widget>[
-            CampanhaScreen(),
-            OngScreen(),
-            InteresseScreen(),
-            PerfilScreen()
-          ],
+        body: SafeArea(
+          child: IndexedStack(
+            
+            index: currentIndex,
+            children: screens,
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
-          onTap: (index) => selecionarTela(index),
+          onTap: (index) {
+            screens.removeAt(index);
+            switch (index) {
+              case 0:
+                screens.insert(0, CampanhaScreen(key: UniqueKey()));
+                break;
+              case 1:
+                screens.insert(1, OngScreen(key: UniqueKey()));
+                break;
+              case 2:
+                screens.insert(2, InteresseScreen(key: UniqueKey()));
+                break;
+              case 3:
+                screens.insert(3, PerfilDetalhesScreen(key: UniqueKey()));
+                break;
+            }
+
+            setState(() => currentIndex = index);
+          },
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.add_location),

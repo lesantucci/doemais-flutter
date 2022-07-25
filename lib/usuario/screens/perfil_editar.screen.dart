@@ -61,16 +61,20 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
   }
 
   void alterarSenha() {
+    String message = '';
+    if (_novaSenha != _repetirNovaSenha) {
+      message = 'Senhas não conferem';
+    }
     usuarioService
         .alterarSenha(_senhaAntiga, _novaSenha, widget.usuario.email)
         .then((success) {
-      String message = 'Senha alterada com sucesso!';
+      message = 'Senha alterada com sucesso!';
       if (!success) {
         message = 'Não foi possível alterar senha';
       }
-      final snackbar = SnackBar(content: Text(message));
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
     });
+    final snackbar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 
   @override

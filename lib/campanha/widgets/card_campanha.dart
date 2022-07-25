@@ -1,6 +1,7 @@
 import 'package:doemais/campanha/models/campanha.model.dart';
 import 'package:doemais/campanha/services/campanha.service.dart';
 import 'package:flutter/material.dart';
+import 'package:doemais/campanha/screens/detalhes.screen.dart';
 
 class CardCampanha extends StatefulWidget {
   final Campanha campanha;
@@ -32,7 +33,11 @@ class _CardCampanhaState extends State<CardCampanha> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {print("Clicou em ${widget.campanha.nome}")},
+      onTap: () => {
+        showDialog(
+            context: context,
+            builder: (context) => DetalhesScreen(id: widget.campanha.id))
+      },
       child: Card(
           child: SizedBox(
               height: 140,

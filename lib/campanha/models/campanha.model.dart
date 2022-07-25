@@ -2,51 +2,48 @@ import 'package:doemais/commons/models/agenda.model.dart';
 import 'package:doemais/commons/models/endereco.model.dart';
 
 class Campanha {
-  final String id;
-  final dynamic ong;
-  final String ongNome;
-  final String nome;
-  final String descricao;
-  final Map imagens;
-  final Endereco endereco;
-  final int apoiadores;
-  bool apoio;
-  final Agenda agenda;
-  final String dataInicial;
-  final String dataFinal;
-  final int categoria;
-  final int status;
+  String id = '';
+  dynamic ong = '';
+  String ongNome = '';
+  String nome = '';
+  String descricao = '';
+  Map imagens = {};
+  Endereco endereco = const Endereco(
+      cep: 'cep',
+      logradouro: 'logradouro',
+      complemento: 'complemento',
+      bairro: 'bairro',
+      localidade: "localidade",
+      uf: 'uf',
+      latitude: 'latitude',
+      longitude: 'longitude');
+  int apoiadores = 0;
+  bool apoio = false;
+  Agenda agenda =
+      const Agenda(atividade: [], horaInicio: 'horaInicio', horaFim: 'horaFim');
+  String dataInicial = '';
+  String dataFinal = '';
+  int categoria = 0;
+  int status = 0;
 
-  Campanha(
-      {required this.id,
-      required this.ong,
-      required this.ongNome,
-      required this.nome,
-      required this.descricao,
-      required this.imagens,
-      required this.endereco,
-      required this.apoiadores,
-      required this.apoio,
-      required this.agenda,
-      required this.dataInicial,
-      required this.dataFinal,
-      required this.categoria,
-      required this.status});
+  Campanha();
+
   factory Campanha.fromJson(Map<String, dynamic> json) {
-    return Campanha(
-        id: json['_id'],
-        ong: json['ong'],
-        ongNome: json['ongNome'],
-        nome: json['nome'],
-        descricao: json['descricao'],
-        imagens: json['imagens'],
-        endereco: Endereco.fromJson(json['endereco']),
-        apoiadores: json['apoiadores'],
-        apoio: json['apoio'],
-        agenda: Agenda.fromJson(json['agenda']),
-        dataInicial: json['dataInicial'],
-        dataFinal: json['dataFinal'],
-        categoria: json['categoria'],
-        status: json['status']);
+    Campanha campanha = Campanha();
+    campanha.id = json['_id'];
+    campanha.ong = json['ong'];
+    campanha.ongNome = json['ongNome'];
+    campanha.nome = json['nome'];
+    campanha.descricao = json['descricao'];
+    campanha.imagens = json['imagens'];
+    campanha.endereco = Endereco.fromJson(json['endereco']);
+    campanha.apoiadores = json['apoiadores'];
+    campanha.apoio = json['apoio'];
+    campanha.agenda = Agenda.fromJson(json['agenda']);
+    campanha.dataInicial = json['dataInicial'];
+    campanha.dataFinal = json['dataFinal'];
+    campanha.categoria = json['categoria'];
+    campanha.status = json['status'];
+    return campanha;
   }
 }

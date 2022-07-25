@@ -22,15 +22,35 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
   late Usuario usuario = Usuario();
 
   void carregaUsuarioPerfil() {
-    service
-        .consultarPerfil()
-        .then((response) => {setState(() => usuario = response)});
+    service.consultarPerfil().then((response) => {
+          setState(
+            () {
+              usuario = response;
+              preencheIniciais(response);
+            },
+          )
+        });
   }
 
   @override
   void initState() {
     super.initState();
     carregaUsuarioPerfil();
+  }
+
+  void preencheIniciais(Usuario u) {
+    if (u.nome != "") {
+      var nomes = u.nome.split(" ");
+      var iniciais = "";
+
+      iniciais = nomes[0].substring(0, 1).toUpperCase();
+
+      if (nomes.length > 1) {
+        iniciais = iniciais + nomes[1].substring(0, 1).toUpperCase();
+      }
+
+      usuario.iniciais = iniciais;
+    }
   }
 
   @override
@@ -89,10 +109,11 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 10,
+                                      left: 10,
                                       top: 5,
                                       right: 10,
-                                      bottom: 5,),
+                                      bottom: 5,
+                                    ),
                                     child: SizedBox(
                                       width: double.infinity,
                                       child: Text(
@@ -166,7 +187,9 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
                                                   Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => PerfilEditarScreen(usuario)),
+                                                        builder: (context) =>
+                                                            PerfilEditarScreen(
+                                                                usuario)),
                                                   );
                                                 },
                                                 style: ButtonStyle(

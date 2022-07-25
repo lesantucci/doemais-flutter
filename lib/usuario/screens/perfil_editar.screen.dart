@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:doemais/commons/widgets/custom_button.dart';
 import 'package:doemais/commons/widgets/custom_dropdown.dart';
-import 'package:doemais/commons/widgets/text_field.dart';
 import 'package:doemais/commons/widgets/title.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/models/usuario.model.dart';
@@ -25,14 +26,19 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
   String _sexo = "";
   String _contato = "";
 
+  String _senhaAntiga = "";
+  String _novaSenha = "";
+  String _repetirNovaSenha = "";
+
   final usuarioService = UsuarioService();
 
   void salvar() {
     final usuario = Usuario();
     usuario.nome = _nome == "" ? widget.usuario.nome : _nome;
-    usuario.sexo =  _sexo == "" ? widget.usuario.sexo : _sexo;
-    usuario.dtNascimento =  _dtNascimento == "" ? widget.usuario.dtNascimento : _dtNascimento;
-    usuario.contato =  _contato == "" ? widget.usuario.contato : _contato;
+    usuario.sexo = _sexo == "" ? widget.usuario.sexo : _sexo;
+    usuario.dtNascimento =
+        _dtNascimento == "" ? widget.usuario.dtNascimento : _dtNascimento;
+    usuario.contato = _contato == "" ? widget.usuario.contato : _contato;
 
     usuarioService.atualizarPerfil(usuario).then((success) {
       String message = 'Perfil salvo com sucesso!';
@@ -52,6 +58,19 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
 
   void retornar() {
     PerfilController.instance.changePage(PerfilController.perfilDetalheScreen);
+  }
+
+  void alterarSenha() {
+    usuarioService
+        .alterarSenha(_senhaAntiga, _novaSenha, widget.usuario.email)
+        .then((success) {
+      String message = 'Senha alterada com sucesso!';
+      if (!success) {
+        message = 'Não foi possível alterar senha';
+      }
+      final snackbar = SnackBar(content: Text(message));
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
+    });
   }
 
   @override
@@ -75,7 +94,8 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                     child: Row(
                       children: const [
                         Padding(
-                          padding: EdgeInsets.only(bottom: 10, top: 10),
+                          padding:
+                              EdgeInsets.only(bottom: 10, top: 10, left: 5),
                           child: CustomTitle(texto: "Dados pessoais"),
                         ),
                       ],
@@ -91,8 +111,7 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                     decoration: const InputDecoration(
                       labelText: 'Nome',
                     ),
-                  )
-                  ,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(0),
                     child: Row(
@@ -102,7 +121,7 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                           child: SizedBox(
                             width: double.infinity,
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 5),
+                              padding: const EdgeInsets.all(0),
                               child: TextFormField(
                                 initialValue: widget.usuario.dtNascimento,
                                 onChanged: (text) {
@@ -118,25 +137,22 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                           ),
                         ),
                         Expanded(
-                          flex: 1,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 5),
+                            padding: const EdgeInsets.only(left: 5, top: 10),
                             child: CustomDropdown(
                                 label: "Sexo",
                                 state: dropdownSexoState,
                                 lista: listaSexo,
                                 onChanged: (value) => {
-                                  setState(() => {
-                                    _sexo = value
-                                  })
-                                },
+                                      setState(() => {_sexo = value})
+                                    },
                                 value: widget.usuario.sexo),
                           ),
                         ),
                       ],
                     ),
                   ),
-                 TextFormField(
+                  TextFormField(
                     initialValue: widget.usuario.contato,
                     onChanged: (text) {
                       setState(() {
@@ -149,37 +165,45 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                   ),
                   FractionallySizedBox(
                     widthFactor: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                            height: 50,
-                            width: 180,
-                            child: CustomButton(
-                                text: 'SALVAR ALTERAÇÕES', onPressed: salvar))
-                      ],
-                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                                height: 50,
+                                width: 180,
+                                child: CustomButton(
+                                    text: 'SALVAR ALTERAÇÕES',
+                                    onPressed: salvar))
+                          ],
+                        )),
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: Row(
                       children: const [
                         Padding(
-                          padding: EdgeInsets.only(bottom: 10, top: 60),
+                          padding:
+                              EdgeInsets.only(bottom: 10, top: 60, left: 5),
                           child: CustomTitle(texto: "Conta"),
                         ),
                       ],
                     ),
                   ),
-                  TextFormField(
-                    obscureText: true,
-                    onChanged: (text) {},
-                    decoration: const InputDecoration(
-                      labelText: 'Senha Antiga',
-                    ),
-                  ),
                   Padding(
-                    padding: const EdgeInsets.all(0),
+                      padding: const EdgeInsets.all(5),
+                      child: TextFormField(
+                        obscureText: true,
+                        onChanged: (text) {
+                          _senhaAntiga = text;
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Senha Antiga',
+                        ),
+                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(5),
                     child: Row(
                       children: [
                         Expanded(
@@ -188,9 +212,11 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 5),
-                              child:  TextFormField(
+                              child: TextFormField(
                                 obscureText: true,
-                                onChanged: (text) {},
+                                onChanged: (text) {
+                                  _novaSenha = text;
+                                },
                                 decoration: const InputDecoration(
                                   labelText: 'Nova Senha',
                                 ),
@@ -204,9 +230,11 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5),
-                              child:  TextFormField(
+                              child: TextFormField(
                                 obscureText: true,
-                                onChanged: (text) {},
+                                onChanged: (text) {
+                                  _repetirNovaSenha = text;
+                                },
                                 decoration: const InputDecoration(
                                   labelText: 'Repetir Nova Senha',
                                 ),
@@ -219,18 +247,19 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                   ),
                   FractionallySizedBox(
                     widthFactor: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                            height: 50,
-                            width: 180,
-                            child: CustomButton(
-                                text: 'ALTERAR SENHA', onPressed: () => {
-
-                                }))
-                      ],
-                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                                height: 50,
+                                width: 180,
+                                child: CustomButton(
+                                    text: 'ALTERAR SENHA',
+                                    onPressed: () => {alterarSenha()}))
+                          ],
+                        )),
                   ),
                 ],
               ),

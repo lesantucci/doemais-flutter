@@ -4,6 +4,7 @@ import 'package:doemais/ong/services/ong.service.dart';
 import 'package:flutter/material.dart';
 
 import '../../campanha/widgets/card_campanha.dart';
+import '../widgets/agendaWidget.dart';
 
 class OngDetailScreen extends StatefulWidget {
   String id;
@@ -131,6 +132,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                                     )))
                           ],
                         ),
+                        //AgendaWidget()
                       ],
                     )),
                 Expanded(

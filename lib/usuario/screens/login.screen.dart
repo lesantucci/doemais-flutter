@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Expanded(
               child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Text(
                 "DOE  ",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36),

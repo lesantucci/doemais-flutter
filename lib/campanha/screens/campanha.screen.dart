@@ -12,6 +12,7 @@ class CampanhaScreen extends StatefulWidget {
 
 class _CampanhaScreenState extends State<CampanhaScreen> {
   List<Campanha> lista = [];
+  List<Campanha> listaFiltrada = [];
 
   void listarCampanhas() {
     print("ENTROU NA CAMPANHA");
@@ -19,6 +20,7 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
     serviceCampanha.listarCampanhas().then((listaResponse) => {
           setState(() {
             lista = listaResponse;
+            listaFiltrada = listaResponse;
           })
         });
   }
@@ -41,7 +43,7 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: TextFormField(
-                  onChanged: (text) {},
+                  onChanged: searchCampanha,
                   decoration: const InputDecoration(
                     labelText: 'Pesquisar',
                   ),
@@ -52,10 +54,23 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
                       ? ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemCount: lista.length,
+                          itemCount: listaFiltrada.length,
                           itemBuilder: (context, index) =>
-                              CardCampanha(campanha: lista[index]))
+                              CardCampanha(campanha: listaFiltrada[index]))
                       : const Text("Sem dados para serem exibidos"))
             ])));
+  }
+
+  void searchCampanha(String query) {
+    final suggestions = lista.where((ong) {
+      final titulo = ong.nome.toLowerCase();
+      final input = query.toLowerCase();
+
+      return titulo.contains(input);
+    }).toList();
+
+    setState(() {
+      listaFiltrada = suggestions;
+    });
   }
 }

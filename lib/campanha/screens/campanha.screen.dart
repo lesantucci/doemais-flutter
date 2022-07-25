@@ -14,6 +14,7 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
   List<Campanha> lista = [];
 
   void listarCampanhas() {
+    print("ENTROU NA CAMPANHA");
     var serviceCampanha = CampanhaService();
     serviceCampanha.listarCampanhas().then((listaResponse) => {
           setState(() {
@@ -47,12 +48,13 @@ class _CampanhaScreenState extends State<CampanhaScreen> {
                 ),
               ),
               Expanded(
-                  child: lista.isNotEmpty ? ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: lista.length,
-                      itemBuilder: (context, index) =>
-                          CardCampanha(campanha: lista[index]))
+                  child: lista.isNotEmpty
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: lista.length,
+                          itemBuilder: (context, index) =>
+                              CardCampanha(campanha: lista[index]))
                       : const Text("Sem dados para serem exibidos"))
             ])));
   }

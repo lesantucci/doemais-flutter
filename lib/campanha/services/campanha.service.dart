@@ -18,7 +18,7 @@ class CampanhaService {
   }
 
   Future<bool> apoiar(String id) async {
-    Response response = await HttpHandler.put(Endpoints.campanhaApoiar,
+    Response response = await HttpHandler.post(Endpoints.campanhaApoiar,
         <String, dynamic>{'id': id});
     if (response.statusCode == 200 || response.statusCode == 201) {
       return true;

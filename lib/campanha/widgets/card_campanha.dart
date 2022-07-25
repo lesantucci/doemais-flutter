@@ -22,7 +22,7 @@ class _CardCampanhaState extends State<CardCampanha> {
     service.apoiar(widget.campanha.id).then((res) => {
           setState(() {
             if (res) {
-              widget.campanha.apoio = widget.campanha.apoio ? false : false;
+              widget.campanha.apoio = widget.campanha.apoio ? false : true;
             }
             _disable = false;
           })

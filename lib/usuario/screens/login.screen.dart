@@ -48,6 +48,23 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Expanded(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "DOE  ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
+              ),
+              Icon(
+                Icons.add,
+                color: Colors.red,
+                size: 46,
+              ),
+              Text("  MAIS",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36))
+            ],
+          )),
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: FractionallySizedBox(

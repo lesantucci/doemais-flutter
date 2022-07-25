@@ -34,4 +34,11 @@ class OngService {
     final objJson = json.decode(response.body)['campanhas'];
     return List<Campanha>.from(objJson.map((data) => Campanha.fromJson(data)));
   }
+
+  Future<Ong> pesquisarOng(id) async {
+    String endpoint = '${Endpoints.ong}/$id';
+    Response response = await HttpHandler.get(endpoint);
+    final objJson = json.decode(response.body)['ong'];
+    return Future<Ong>(objJson.map((data) => Ong.fromJson(data)));
+  }
 }

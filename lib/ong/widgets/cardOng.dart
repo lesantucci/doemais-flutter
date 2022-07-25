@@ -27,8 +27,7 @@ class _CardOngState extends State<CardOng> {
         onTap: () => showDialog(
             context: context,
             builder: (context) => OngDetailScreen(
-                  ong: super.widget.ong,
-                  imagens: super.widget.ong.imagens['galeria'],
+                  id: super.widget.ong.id,
                 )),
         child: Card(
             child: SizedBox(

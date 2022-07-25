@@ -2,6 +2,7 @@ import 'package:doemais/commons/widgets/title.dart';
 import 'package:doemais/interesse/widgets/ultimos-interesses.widget.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/models/usuario.model.dart';
+import 'package:doemais/usuario/screens/login.screen.dart';
 import 'package:doemais/usuario/screens/perfil_editar.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,28 @@ class _PerfilDetalhesScreenState extends State<PerfilDetalhesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Perfil"),
+      ),
+      bottomSheet: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: SizedBox(
+              height: 50,
+              width: 180,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                  );
+                },
+                child: const Text('Deslogar da Conta'),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 10),

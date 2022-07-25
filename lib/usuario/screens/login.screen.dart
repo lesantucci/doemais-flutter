@@ -1,4 +1,3 @@
-import 'package:doemais/campanha/screens/detalhes.screen.dart';
 import 'package:doemais/home/screens/home.screen.dart';
 import 'package:doemais/usuario/screens/cadastro.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
@@ -25,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (value){
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => DetalhesScreen()),
+                MaterialPageRoute(builder: (context) => HomeScreen()),
               )
           }
           else {

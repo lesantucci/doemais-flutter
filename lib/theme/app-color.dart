@@ -8,7 +8,6 @@ class AppColor {
   static Color title = AppColor.primary;
   static Color cardColor = Color(0x0f6200ee);
 
-  static Color primary = Color(0xff6200ee);
-  static Color backgroundPrimary = Color(0xff985eff);
+  static Color primary =Color(0xff6200ee);
   static Color primaryVariant = Color(0xffff4666);
 }

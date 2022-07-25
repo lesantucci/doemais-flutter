@@ -69,7 +69,7 @@ class _CardOngState extends State<CardOng> {
                                     super.widget.ong.favorito
                                         ? IconButton(
                                             icon: const Icon(Icons.star),
-                                            color: Colors.purple,
+                                            color: Color(0xff6200ee),
                                             visualDensity:
                                                 VisualDensity.standard,
                                             iconSize: 30,
@@ -92,7 +92,7 @@ class _CardOngState extends State<CardOng> {
                                           )
                                         : IconButton(
                                             icon: const Icon(Icons.star_border),
-                                            color: Colors.purple,
+                                            color: Color(0xff6200ee),
                                             visualDensity:
                                                 VisualDensity.standard,
                                             iconSize: 30,

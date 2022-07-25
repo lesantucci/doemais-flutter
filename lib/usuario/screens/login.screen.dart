@@ -18,18 +18,26 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isDisabled = false;
 
   void signIn() async {
-    setState(() { _isDisabled = true; });
+    setState(() {
+      _isDisabled = true;
+    });
     final usuarioService = UsuarioService();
     usuarioService.login(_login, _password).then((value) => {
-          if (value){
+          if (value)
+            {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => HomeScreen()),
               )
-          }
-          else {
-          setState(() {_isDisabled = false;})
-          }
+            }
+          else
+            {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Falha ao realizar login'))),
+              setState(() {
+                _isDisabled = false;
+              })
+            }
         });
   }
 
@@ -101,8 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     ));
   }
-  
+
   habilitaBotao() {
-    return  _isDisabled ? null : () => {signIn()};
+    return _isDisabled ? null : () => {signIn()};
   }
 }

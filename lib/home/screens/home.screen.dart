@@ -6,6 +6,7 @@ import 'package:doemais/ong/screens/ong.screen.dart';
 import 'package:doemais/theme/app-color.dart';
 import 'package:doemais/usuario/controller/perfil_controller.dart';
 import 'package:doemais/usuario/screens/perfil.screen.dart';
+import 'package:doemais/usuario/screens/perfil_detalhes.screen.dart';
 import 'package:doemais/usuario/services/usuario.service.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     CampanhaScreen(),
     OngScreen(),
     InteresseScreen(),
-    PerfilScreen()
+    PerfilDetalhesScreen()
   ];
 
   int currentIndex = 0;
@@ -50,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 screens.insert(2, InteresseScreen(key: UniqueKey()));
                 break;
               case 3:
-                screens.insert(3, PerfilScreen(key: UniqueKey()));
+                screens.insert(3, PerfilDetalhesScreen(key: UniqueKey()));
                 break;
             }
 

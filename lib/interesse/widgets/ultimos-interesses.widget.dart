@@ -28,9 +28,10 @@ class _UltimosInteressesState extends State<UltimosInteresses> {
                   ],
                 ),
                 Row(
-                  children: [
-                    ListaUltimosInteresses(
-                        lista: InteresseController.instance.lista),
+                  children: const [
+                    Expanded(child: 
+                      ListaUltimosInteresses()
+                    ,)
                   ],
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:doemais/campanha/models/campanha.model.dart';
 import 'package:doemais/commons/endpoints.dart';
 import 'package:doemais/commons/handler/http.dart';
 import 'package:doemais/ong/models/categorias.model.dart';
@@ -25,5 +26,12 @@ class OngService {
     final objJson = json.decode(response.body)['categorias'];
     return List<CategoriaOng>.from(
         objJson.map((data) => CategoriaOng.fromJson(data)));
+  }
+
+  Future<List<Campanha>> pesquiarCampanhasOng(id) async {
+    String endpoint = '${Endpoints.ong}/$id';
+    Response response = await HttpHandler.get(endpoint);
+    final objJson = json.decode(response.body)['campanhas'];
+    return List<Campanha>.from(objJson.map((data) => Campanha.fromJson(data)));
   }
 }

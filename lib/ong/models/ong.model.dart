@@ -1,5 +1,3 @@
-import 'package:doemais/commons/models/endereco.model.dart';
-
 class Ong {
   final String id;
   final String nome;

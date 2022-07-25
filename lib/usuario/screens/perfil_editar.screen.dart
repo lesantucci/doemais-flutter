@@ -142,8 +142,8 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                           padding: const EdgeInsets.only(
                               left: 5, top: 20, bottom: 20),
                           child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: "Sexo",
                             ),
                             elevation: 16,
@@ -158,7 +158,7 @@ class _PerfilEditarScreenState extends State<PerfilEditarScreen> {
                             onChanged: (value) {
                               _sexo = value!;
                             },
-                            //value: 'widget.usuario.sexo',
+                            value: widget.usuario.sexo,
                           ),
                         )),
                       ],

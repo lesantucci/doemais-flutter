@@ -85,14 +85,15 @@ class _CardCampanhaState extends State<CardCampanha> {
                                           text: TextSpan(
                                               text: widget.campanha.descricao,
                                               style: const TextStyle(
-                                                  fontSize: 12)))),
+                                                  fontSize: 12,
+                                                  color: Colors.grey)))),
                                   const Spacer(),
                                   Row(
                                     children: [
                                       Expanded(
-                                          flex: 2,
+                                          flex: 4,
                                           child: Text(
-                                            widget.campanha.endereco.toString(),
+                                            widget.campanha.endereco.localidade,
                                             style:
                                                 const TextStyle(fontSize: 10),
                                           )),
@@ -100,7 +101,7 @@ class _CardCampanhaState extends State<CardCampanha> {
                                         width: 5,
                                       ),
                                       Expanded(
-                                          flex: 0,
+                                          flex: -1,
                                           child: SizedBox(
                                             height: 32,
                                             child: ElevatedButton.icon(

@@ -3,7 +3,6 @@ import 'package:doemais/ong/models/ong.model.dart';
 import 'package:doemais/ong/widgets/ongFilters.screen.dart';
 import 'package:doemais/ong/services/ong.service.dart';
 import 'package:doemais/ong/widgets/cardOng.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -8,6 +8,7 @@ class Endpoints {
   static const String usuarioPerfil = "$baseUrl/usuario/perfil";
   static const String usuarioCampanha = "$baseUrl/usuario/campanha";
   static const String usuarioOng = "$baseUrl/usuario/ong";
+  static const String changePassword = "$baseUrl/usuario/login/changePassword";
 
   //CAMPANHA
   static const String campanha = "$baseUrl/campanha";

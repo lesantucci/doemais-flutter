@@ -14,7 +14,7 @@ class _CustomTitleState extends State<CustomTitle> {
   Widget build(BuildContext context) {
     return Text(widget.texto,
         style: const TextStyle(
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
         ));
   }

@@ -24,7 +24,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 20, top: 10),
       child: DropdownButtonFormField<String>(
         decoration: InputDecoration(
           border: const OutlineInputBorder(),

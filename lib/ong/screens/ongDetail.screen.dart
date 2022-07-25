@@ -132,7 +132,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                                     )))
                           ],
                         ),
-                        AgendaWidget()
+                        //AgendaWidget()
                       ],
                     )),
                 Expanded(

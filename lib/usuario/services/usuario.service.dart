@@ -56,4 +56,19 @@ class UsuarioService {
       return Usuario();
     }
   }
+
+  Future<bool> alterarSenha(senhaAtual, novaSenha, email) async {
+    dynamic body = <String, dynamic>{
+      'senhaAtual': senhaAtual,
+      'novaSenha': novaSenha,
+      'email': email,
+    };
+    print(body);
+    Response response = await HttpHandler.post(Endpoints.changePassword, body);
+    print(response.body);
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
 }

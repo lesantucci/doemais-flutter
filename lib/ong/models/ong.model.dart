@@ -1,3 +1,5 @@
+import 'package:doemais/commons/models/agenda.model.dart';
+
 class Ong {
   String id = '';
   String nome = '';
@@ -11,7 +13,7 @@ class Ong {
   int campanhasAtivas = 0;
   int campanhasEncerradas = 0;
   Map imagens = {};
-  Map agenda = {};
+  Agenda agenda = Agenda(atividade: [], horaInicio: '', horaFim: '');
 
   Ong();
 
@@ -29,7 +31,7 @@ class Ong {
     ong.categoria = json['categoria'];
     ong.endereco = json['endereco'];
     ong.imagens = json['imagens'];
-    ong.agenda = json['agenda'];
+    ong.agenda = Agenda.fromJson(json['agenda']);
     return ong;
   }
 }

@@ -34,6 +34,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
     ongService.pesquisarOng(widget.id).then((response) => {
           setState(() {
             ong = response;
+            print(ong.agenda.atividade);
             imagens = ong.imagens['galeria'];
           })
         });
@@ -58,9 +59,9 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                   Tab(text: "Sobre"),
                   Tab(text: "Campanhas"),
                 ],
-                labelColor: Colors.purple,
+                labelColor: Color(0xff6200ee),
                 labelStyle: TextStyle(),
-                indicatorColor: Colors.purple,
+                indicatorColor: Color(0xff6200ee),
               ),
             ),
             body: TabBarView(
@@ -73,7 +74,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                         Text(
                           ong.nome,
                           style: const TextStyle(
-                              color: Colors.purple,
+                              color: Color(0xff6200ee),
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
@@ -111,7 +112,7 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                             Text(
                               'Localização',
                               style: TextStyle(
-                                  color: Colors.purple,
+                                  color: Color(0xff6200ee),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                             ),
@@ -132,7 +133,10 @@ class _OngDetailScreenState extends State<OngDetailScreen> {
                                     )))
                           ],
                         ),
-                        //AgendaWidget()
+                        if (ong.agenda.horaFim != '')
+                          Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: AgendaWidget(agenda: ong.agenda))
                       ],
                     )),
                 Expanded(

@@ -71,7 +71,7 @@ class _CardCampanhaState extends State<CardCampanha> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2),
-                                    child: Text(widget.campanha.ong["_id"],
+                                    child: Text(widget.campanha.ongNome,
                                         style: const TextStyle(fontSize: 12)),
                                   ),
                                   Padding(
